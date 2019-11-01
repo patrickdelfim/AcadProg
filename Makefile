@@ -26,7 +26,6 @@ CC=gcc
 CC_FLAGS=-c         \
          -W         \
          -Wall      \
-         -ansi      \
          -pedantic
 
 # Comando para limpar usado no clean target
