@@ -1,17 +1,21 @@
-int validarCPF(char *cpf, int tam) {
-    int i, j;
+#include "../lib/validadores.h"
+
+int validarCPF(char *cpf) {
+    int i, j, tam = strlen(cpf);
     int num[11];
-    int soma1, soma2, flag;
-    float resto1, resto2;
+    int soma1 = 0, soma2 = 0, flag;
+    int resto1, resto2;
 
     // verificar se cpf tem 11 digitos
     if (tam != 11) {
+        printf("O CPF contem pelo menos 11 digitos\n");
         return 0;
     }
 
     // verificar se todos os caracteres sao numeros
     for (i = 0; i < tam; i++) {
         if (cpf[i] < 48 || cpf[i] > 57) {
+            printf("O CPF nao pode conter letras\n");
             return 0;
         }
     }
@@ -45,10 +49,8 @@ int validarCPF(char *cpf, int tam) {
     }
 
     //calculo segundo digito verificador
-    for (i = 0, j = 11; j >= 2; i++) {
+    for (i = 0, j = 11; j >= 2; i++, j--) {
         soma2 += num[i] * j;
-
-        j--;
     }
 
     resto2 = (soma2 * 10) % 11;
@@ -65,6 +67,7 @@ int validarCPF(char *cpf, int tam) {
     if (resto1 == num[9] && resto2 == num[10]) {
         return 1;
     } else {
+        printf("Talvez voce tenha digitado o CPF errado tente novamente!\n");
         return 0;
     }
 }

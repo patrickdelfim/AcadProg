@@ -1,1 +1,4 @@
-int validarCPF(char *cpf,int tam);
+#include <stdio.h>
+#include <string.h>
+
+int validarCPF(char *cpf);

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 //==================================//
 //   Funcoes relativas a menus e    //
@@ -6,6 +7,7 @@
 //==================================//
 
 char menuInicial() {
+    char opcao;
     system("cls");
     printf("Bem Vindo!\n\n");
     printf("Escolha uma opcao:\n");
@@ -14,10 +16,8 @@ char menuInicial() {
 
     printf("X - Sair\n");
 
-    char opcao;
-
     printf(">>> ");
-    opcao = getchar();
+    scanf(" %c", &opcao);
 
     return opcao;
 }

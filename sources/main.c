@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 /*Prototipos em lib*/
 #include "../lib/aluno.h"
@@ -12,6 +13,14 @@ int main() {
 
     do {
         input = menuInicial();
+
+        if (input == '1') {
+            struct aluno alunoCadastrado;
+
+            cadastroAluno(alunoCadastrado);
+
+            printf("%s\n", alunoCadastrado.cpf);
+        }
 
     } while (input != 'x' && input != 'X');
 
