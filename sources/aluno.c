@@ -2,7 +2,7 @@
 
 void cadastroAluno(struct aluno cadastro) {
     while (1) {
-        system("cls");
+        system(clear);
         getchar();
 
         printf("Por favor insira as informacoes do aluno:\n\n");

@@ -1,14 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 //==================================//
 //   Funcoes relativas a menus e    //
 //        input do usuario          //
 //==================================//
 
+#include "../lib/menu.h"
+
 char menuInicial() {
     char opcao;
-    system("cls");
+    system(clear);
     printf("Bem Vindo!\n\n");
     printf("Escolha uma opcao:\n");
 
