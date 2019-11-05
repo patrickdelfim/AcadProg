@@ -5,6 +5,8 @@
 #include "../lib/aluno.h"
 #include "../lib/menu.h"
 #include "../lib/validadores.h"
+#include "../lib/professor.h"
+
 
 /* void cadastroAluno(struct aluno *cadastro); */
 
@@ -20,6 +22,17 @@ int main() {
             cadastroAluno(alunoCadastrado);
 
             printf("%s\n", alunoCadastrado.cpf);
+        }
+        if (input == '2') {
+
+
+            struct professor profCadastrado;
+
+            profCadastrado.cpf = malloc(sizeof(char)*11);
+
+            cadastroProfessor(profCadastrado);
+
+            printf("%s\n", profCadastrado.cpf);
         }
 
     } while (input != 'x' && input != 'X');
