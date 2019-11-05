@@ -4,9 +4,8 @@
 /*Prototipos em lib*/
 #include "../lib/aluno.h"
 #include "../lib/menu.h"
-#include "../lib/validadores.h"
 #include "../lib/professor.h"
-
+#include "../lib/validadores.h"
 
 /* void cadastroAluno(struct aluno *cadastro); */
 
@@ -18,17 +17,17 @@ int main() {
 
         if (input == '1') {
             struct aluno alunoCadastrado;
+            alunoCadastrado.cpf = malloc(sizeof(char) * 11);
+            alunoCadastrado.nome = malloc(sizeof(char) * 100);
 
             cadastroAluno(alunoCadastrado);
 
             printf("%s\n", alunoCadastrado.cpf);
         }
         if (input == '2') {
-
-
             struct professor profCadastrado;
 
-            profCadastrado.cpf = malloc(sizeof(char)*11);
+            profCadastrado.cpf = malloc(sizeof(char) * 11);
 
             cadastroProfessor(profCadastrado);
 

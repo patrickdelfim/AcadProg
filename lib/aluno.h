@@ -9,7 +9,9 @@
 #endif
 
 struct aluno {
+    int id_aluno;
     char *cpf;
+    char *nome;
 };
 
 void cadastroAluno(struct aluno cadastro);
