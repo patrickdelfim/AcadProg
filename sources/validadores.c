@@ -8,15 +8,13 @@ int validarCPF(char *cpf) {
 
     // verificar se cpf tem 11 digitos
     if (tam != 11) {
-        printf("O CPF contem pelo menos 11 digitos\n");
-        return 0;
+        return 2;  // Tamanho insuficiente
     }
 
     // verificar se todos os caracteres sao numeros
     for (i = 0; i < tam; i++) {
         if (cpf[i] < 48 || cpf[i] > 57) {
-            printf("O CPF nao pode conter letras\n");
-            return 0;
+            return 3;  // Letra no meio do CPF
         }
     }
 
@@ -37,7 +35,7 @@ int validarCPF(char *cpf) {
     }
 
     if (flag == 1) {
-        return 0;
+        return 4;  // Numeros iguais exp: 11111111111
 
     } else {
         //calculo primeiro digito verificador
@@ -65,9 +63,8 @@ int validarCPF(char *cpf) {
 
     // retornar resultado final
     if (resto1 == num[9] && resto2 == num[10]) {
-        return 1;
+        return 1;  // CPF valido
     } else {
-        printf("Talvez voce tenha digitado o CPF errado tente novamente!\n");
-        return 0;
+        return 0;  // CPF invalido
     }
 }
