@@ -4,8 +4,8 @@
 #ifdef _WIN32        // Caso o sistema operacional seja windows
 #define clear "cls"  // o clear vai ser o comando cls
 #endif
-#ifdef linux           // Caso seja linux
-#define clear "clear"  // o clear sera o comando clear
+#ifdef defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))  // Caso seja unix like
+#define clear "clear"                                                                                      // o clear sera o comando clear
 #endif
 
 struct professor {
