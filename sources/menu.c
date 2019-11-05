@@ -12,8 +12,9 @@ char menuInicial() {
     printf("Escolha uma opcao:\n");
 
     printf("1 - Cadastro de aluno\n");
+    printf("2 - Cadastro de professor\n");
 
-    printf("X - Sair\n");
+    corTexto("\nX - Sair\n", 'r');
 
     printf(">>> ");
     scanf(" %c", &opcao);
