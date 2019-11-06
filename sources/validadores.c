@@ -68,3 +68,37 @@ int validarCPF(char *cpf) {
         return 0;  // CPF invalido
     }
 }
+
+int validarEMAIL(char *email) {
+    int tam = strlen(email);
+    int valido = 0, depoisArroba = tam, depoisPonto = tam;
+
+    for (int i = 0; i < tam; i++) {
+        /* pelo menos 3 caracteres antes do arroba para ser um email valido.*/
+
+        if (i > 3) {
+            /* verifica se o email tem arroba*/
+            if (email[i] == '@') {
+                valido++;
+                depoisArroba = i;
+            }
+            /* verifica se o email tem pelo menos 2 caracteres depois do arroba e tambem ponto*/
+            if (i > depoisArroba + 2) {
+                if (email[i] == '.') {
+                    valido++;
+                    depoisPonto = i;
+                }
+            }
+            /* verifica se o email tem pelo menos 2 caracteres depois do ponto*/
+            if (i > depoisPonto + 2) {
+                valido++;
+            }
+        }
+    }
+
+    if (valido >= 3) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

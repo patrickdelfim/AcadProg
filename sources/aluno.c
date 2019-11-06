@@ -59,4 +59,56 @@ void cadastroAluno(struct aluno cadastro) {
         getchar();
         fgets(cadastro.nome, 100, stdin);
     }
+
+    system(clear);
+
+    printf("Por favor insira as informacoes do aluno:\n\n");
+
+    printf("CPF (apenas numeros): ");
+    corTexto(cadastro.cpf, 'g');
+    printf("\n");
+
+    printf("Nome: ");
+    corTexto(cadastro.nome, 'g');
+
+    printf("Email (exemplo@exemplo.com): ");
+    fgets(cadastro.email, 100, stdin);
+
+    while (!validarEMAIL(cadastro.email)) {
+        system(clear);
+
+        corTexto("O email digitado e invalido\n", 'r');
+        printf("Por favor insira as informacoes do aluno:\n\n");
+
+        printf("CPF (apenas numeros): ");
+        corTexto(cadastro.cpf, 'g');
+        printf("\n");
+
+        printf("Nome: ");
+        corTexto(cadastro.nome, 'g');
+
+        printf("Email: ");
+        fgets(cadastro.email, 100, stdin);
+    }
+
+    system(clear);
+
+    printf("Por favor insira as informacoes do aluno:\n\n");
+
+    printf("CPF (apenas numeros): ");
+    corTexto(cadastro.cpf, 'g');
+    printf("\n");
+
+    printf("Nome: ");
+    corTexto(cadastro.nome, 'g');
+
+    printf("Email (exemplo@exemplo.com): ");
+    corTexto(cadastro.email, 'g');
+    printf("\n");
+
+    printf("Deseja salvar esse aluno cadastrado?\n");
+    corTexto("S - Sim\t", 'g');
+    corTexto("N - Nao\n", 'r');
+    printf(">>> ");
+    getchar();
 }

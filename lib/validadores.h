@@ -2,3 +2,5 @@
 #include <string.h>
 
 int validarCPF(char *cpf);
+
+int validarEMAIL(char *email);

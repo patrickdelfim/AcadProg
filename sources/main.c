@@ -17,10 +17,14 @@ int main() {
             struct aluno alunoCadastrado;
             alunoCadastrado.cpf = malloc(sizeof(char) * 11);
             alunoCadastrado.nome = malloc(sizeof(char) * 100);
+            alunoCadastrado.email = malloc(sizeof(char) * 100);
 
             cadastroAluno(alunoCadastrado);
 
-            alunoCadastrado.nome = realloc(alunoCadastrado.nome, strlen(alunoCadastrado.nome));
+            // eu acho que temos que dar um free e salvar o arquivo dentro da funcao cadastroAluno
+            // free(alunoCadastrado.cpf);
+            // free(alunoCadastrado.nome);
+            // free(alunoCadastrado.email);
 
             // printf("%s\n", alunoCadastrado.cpf);
             // printf("%s\n", alunoCadastrado.nome);
