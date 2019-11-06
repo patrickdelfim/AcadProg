@@ -20,6 +20,8 @@ int main() {
 
             cadastroAluno(alunoCadastrado);
 
+            alunoCadastrado.nome = realloc(alunoCadastrado.nome, strlen(alunoCadastrado.nome));
+
             // printf("%s\n", alunoCadastrado.cpf);
             // printf("%s\n", alunoCadastrado.nome);
             // printf("%d\n", strlen(alunoCadastrado.nome)); // Adicionar um realloc no nome do aluno
