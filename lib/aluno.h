@@ -16,3 +16,4 @@ struct aluno {
 };
 
 void cadastroAluno(struct aluno cadastro);
+int salvarAluno(struct aluno aluno);

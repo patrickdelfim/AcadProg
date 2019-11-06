@@ -3,6 +3,8 @@
 #include "../lib/validadores.h"
 
 void cadastroAluno(struct aluno cadastro) {
+		char salvarOpcao;
+
     system(clear);
 
     printf("Por favor insira as informacoes do aluno:\n\n");
@@ -106,9 +108,34 @@ void cadastroAluno(struct aluno cadastro) {
     corTexto(cadastro.email, 'g');
     printf("\n");
 
+		cadastro.cpf = stringNewLine(cadastro.cpf);
+		cadastro.nome = stringNewLine(cadastro.nome);
+		cadastro.email = stringNewLine(cadastro.email);
+		
     printf("Deseja salvar esse aluno cadastrado?\n");
     corTexto("S - Sim\t", 'g');
     corTexto("N - Nao\n", 'r');
     printf(">>> ");
-    getchar();
+    scanf(" %c", &salvarOpcao);
+
+		if(salvarOpcao == 's' || salvarOpcao == 'S') {
+				salvarAluno(cadastro);
+		}
 }
+
+
+int salvarAluno(struct aluno aluno) {
+		FILE *fptr = fopen("./data/aluno.csv", "a");
+		
+		if (fptr == NULL) {
+			corTexto("Erro ao abrir o arquivo\n", 'r');
+			return 0;
+		}
+		
+		fprintf(fptr, "%s,%s,%s\n", aluno.cpf, aluno.nome, aluno.email);
+
+		fclose(fptr);
+
+		return 1;
+}
+
