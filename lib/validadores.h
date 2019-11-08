@@ -4,3 +4,5 @@
 int validarCPF(char *cpf);
 
 int validarEMAIL(char *email);
+
+int validarHorario(char *horario);

@@ -1,4 +1,6 @@
 #include "../lib/aulasDisponiveis.h"  // structs e prototipos
+#include "../lib/utilidade.h"
+#include "../lib/validadores.h"
 
 void cadastroAula(struct aula cadastro) {
     char salvarOpcao;
@@ -13,7 +15,7 @@ void cadastroAula(struct aula cadastro) {
     printf("C - Crossfit\n");
     printf("D - Dança\n");
 
-		printf(">>> ");
+    printf(">>> ");
     scanf(" %c", &cadastro.tipo);
     cadastro.tipo = toupper(cadastro.tipo);
 
@@ -27,7 +29,7 @@ void cadastroAula(struct aula cadastro) {
         printf("C - Crossfit\n");
         printf("D - Dança\n");
 
-				printf(">>> ");
+        printf(">>> ");
         scanf(" %c", &cadastro.tipo);
         cadastro.tipo = toupper(cadastro.tipo);
     }
@@ -41,7 +43,7 @@ void cadastroAula(struct aula cadastro) {
     printf("\n");
     //getchar();
 
-    printf("Digite o dia da semana: ");
+    printf("Digite o dia da semana: \n");
     printf("1 - domingo\n");
     printf("2 - Segunda\n");
     printf("3 - Terca\n");
@@ -50,42 +52,90 @@ void cadastroAula(struct aula cadastro) {
     printf("6 - Sexta\n");
     printf("7 - Sabado\n");
 
+    printf(">>> ");
     scanf("%d", &cadastro.dia);
 
-    while (cadastro.dia != 1 && cadastro.dia != 2 && cadastro.dia != 3 && cadastro.tipo != 4 && cadastro.tipo != 5 && cadastro.tipo != 6 && cadastro.tipo != 7) {
+    while (cadastro.dia != 1 && cadastro.dia != 2 && cadastro.dia != 3 && cadastro.dia != 4 && cadastro.dia != 5 && cadastro.dia != 6 && cadastro.dia != 7) {
         system(clear);
 
-        corTexto("Dia da semana Invalido porfavor digite novamente\n", 'r');
-        printf("Digite o dia da semana:\n \n 1 = domingo   2 = segunda \n 3 = terca   4 = quarta \n 5 = quinta   6 = sexta \n 7 = sabado");
+        corTexto("Dia da semana Invalido porfavor digite novamente\n \n", 'r');
+        printf("Digite o dia da semana: \n");
+        printf("1 - domingo\n");
+        printf("2 - Segunda\n");
+        printf("3 - Terca\n");
+        printf("4 - Quarta\n");
+        printf("5 - Quinta\n");
+        printf("6 - Sexta\n");
+        printf("7 - Sabado\n");
 
+        printf(">>> ");
         scanf("%d", &cadastro.dia);
     }
     system(clear);
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
+    printf("tipo da aula: %c", cadastro.tipo);
+    printf("\n");
+
     printf("dia da semana: ");
-    switch (cadastro.tipo) {
-        case (1):
+    switch (cadastro.dia) {
+        case 1:
             corTexto("Domingo", 'g');
             break;
-        case (2):
+        case 2:
             corTexto("Segunda-feira", 'g');
             break;
-        case (3):
+        case 3:
             corTexto("Terca-feira", 'g');
             break;
-        case (4):
+        case 4:
             corTexto("Quarta-feira", 'g');
             break;
-        case (5):
+        case 5:
             corTexto("Quinta-feira", 'g');
             break;
-        case (6):
+        case 6:
             corTexto("Sexta-feira", 'g');
             break;
-        case (7):
+        case 7:
             corTexto("Sabado", 'g');
             break;
+        default:
+            printf("Error! deu ruim lelek");
     }
+
+    printf("\n");
+
+    printf("Horario da aula no formato HH:MM: ");
+    getchar();
+    fgets(cadastro.horario, 5, stdin);
+
+    int teste = validarHorario(cadastro.horario);
+
+    /* funcao validarHorario dando errado. */
+
+    /*
+    while (validarHorario(cadastro.horario) != 1 && validarHorario(cadastro.horario) != 2) {
+        system(clear);
+
+        if (validarHorario(cadastro.horario) == 1) {
+            break;
+        } else if (validarHorario(cadastro.horario) == 2) {
+            Adicionar procedimento para adicionar 0 antes do numero de horario caso a verificadao
+                retorne 2
+
+            break;
+        } else if (validarHorario(cadastro.horario) == 2) {
+            corTexto("O formato do horario inserido esta incorreto \n", 'r');
+            getchar();
+        }
+
+        printf("Por favor insira as informacoes da aula:\n\n");
+
+        printf("Horario da aula no formato HH:MM: ");
+        fgets(cadastro.horario, 5, stdin);
+    }
+
+*/
 }

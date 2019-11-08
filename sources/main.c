@@ -41,6 +41,8 @@ int main() {
         } else if (input == '3') {
             struct aula aulaCadastro;
 
+            aulaCadastro.horario = malloc(sizeof(char) * 5);
+
             cadastroAula(aulaCadastro);
         }
 
