@@ -3,6 +3,7 @@
 
 /*Prototipos em lib*/
 #include "../lib/aluno.h"
+#include "../lib/aulasDisponiveis.h"
 #include "../lib/menu.h"
 #include "../lib/professor.h"
 #include "../lib/validadores.h"
@@ -36,6 +37,11 @@ int main() {
             profCadastrado.email = malloc(sizeof(char) * 100);
 
             cadastroProfessor(profCadastrado);
+
+        } else if (input == '3') {
+            struct aula aulaCadastrada;
+
+            cadastroAula(aulaCadastrada);
         }
 
     } while (input != 'x' && input != 'X');

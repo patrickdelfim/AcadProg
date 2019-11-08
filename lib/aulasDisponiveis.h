@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,12 +9,16 @@
 #define clear "clear"                                                                                   // o clear sera o comando clear
 #endif
 
-struct professor {
-    int id_professor;
-    char *cpf;
-    char *nome;
-    char *email;
+struct aula {
+    int id_aula;
+    char tipo;
+    int dia;
+    char *horario;
+    int id_prof;
+    int minimo;
+    int maximo;
+    char *faixa_etaria;
 };
 
-void cadastroProfessor(struct professor cadastro);
-int salvarProfessor(struct professor professor);
+void cadastroAula(struct aula cadastro);
+int salvarAula(struct aula aula);
