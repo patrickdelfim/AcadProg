@@ -1,12 +1,4 @@
 #include "../lib/aulasDisponiveis.h"  // structs e prototipos
-#include "../lib/utilidade.h"
-#include "../lib/validadores.h"
-
-
-
-//COMENTARIO TESTE
-
-
 
 void cadastroAula(struct aula cadastro) {
     char salvarOpcao;
@@ -21,6 +13,7 @@ void cadastroAula(struct aula cadastro) {
     printf("C - Crossfit\n");
     printf("D - Dança\n");
 
+		printf(">>> ");
     scanf(" %c", &cadastro.tipo);
     cadastro.tipo = toupper(cadastro.tipo);
 
@@ -34,6 +27,7 @@ void cadastroAula(struct aula cadastro) {
         printf("C - Crossfit\n");
         printf("D - Dança\n");
 
+				printf(">>> ");
         scanf(" %c", &cadastro.tipo);
         cadastro.tipo = toupper(cadastro.tipo);
     }
@@ -42,8 +36,8 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("tipo da aula: ");
-    corTexto(cadastro.tipo, 'g');
+    printf("tipo da aula: %c", cadastro.tipo);
+    /* corTexto(cadastro.tipo, 'g'); */
     printf("\n");
     //getchar();
 

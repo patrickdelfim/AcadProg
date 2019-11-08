@@ -39,9 +39,9 @@ int main() {
             cadastroProfessor(profCadastrado);
 
         } else if (input == '3') {
-            struct aula aulaCadastrada;
+            struct aula aulaCadastro;
 
-            cadastroAula(aulaCadastrada);
+            cadastroAula(aulaCadastro);
         }
 
     } while (input != 'x' && input != 'X');

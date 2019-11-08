@@ -1,6 +1,9 @@
-#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+
+#include "../lib/utilidade.h"
+#include "../lib/validadores.h"
 
 #ifdef _WIN32        // Caso o sistema operacional seja windows
 #define clear "cls"  // o clear vai ser o comando cls
@@ -11,14 +14,15 @@
 
 struct aula {
     int id_aula;
-    char tipo;
-    int dia;
-    char *horario;
     int id_prof;
     int minimo;
     int maximo;
+    int dia;
+    char tipo;
+    char *horario;
     char *faixa_etaria;
 };
 
 void cadastroAula(struct aula cadastro);
 int salvarAula(struct aula aula);
+
