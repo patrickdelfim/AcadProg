@@ -1,3 +1,4 @@
+#include "../lib/utilidade.h"
 void corTexto(char *texto, char opcao) {
     switch (opcao) {
         case 'r':
@@ -14,16 +15,15 @@ void corTexto(char *texto, char opcao) {
 }
 
 char *stringNewLine(char *str) {
-		// Funcao para remover o \n
-		
-		int len = strlen(str);
+    // Funcao para remover o \n
 
-		if (str[len - 1] != '\n') {
-				return str;
-		}
+    int len = strlen(str);
 
-		str[len - 1] = '\0';
+    if (str[len - 1] != '\n') {
+        return str;
+    }
 
-		return str;
+    str[len - 1] = '\0';
+
+    return str;
 }
-

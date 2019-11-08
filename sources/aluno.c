@@ -2,8 +2,8 @@
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
 
-void cadastroAluno(struct aluno cadastro) {
-		char salvarOpcao;
+void cadastroAluno(struct aluno cadastro, int *id_aluno) {
+    char salvarOpcao;
 
     system(clear);
 
@@ -93,6 +93,11 @@ void cadastroAluno(struct aluno cadastro) {
         fgets(cadastro.email, 100, stdin);
     }
 
+    cadastro.id_aluno = *id_aluno;
+    cadastro.cpf = stringNewLine(cadastro.cpf);
+    cadastro.nome = stringNewLine(cadastro.nome);
+    cadastro.email = stringNewLine(cadastro.email);
+
     system(clear);
 
     printf("Por favor insira as informacoes do aluno:\n\n");
@@ -103,39 +108,75 @@ void cadastroAluno(struct aluno cadastro) {
 
     printf("Nome: ");
     corTexto(cadastro.nome, 'g');
+    printf("\n");
 
     printf("Email (exemplo@exemplo.com): ");
     corTexto(cadastro.email, 'g');
-    printf("\n");
+    printf("\n\n");
 
-		cadastro.cpf = stringNewLine(cadastro.cpf);
-		cadastro.nome = stringNewLine(cadastro.nome);
-		cadastro.email = stringNewLine(cadastro.email);
-		
     printf("Deseja salvar esse aluno cadastrado?\n");
     corTexto("S - Sim\t", 'g');
     corTexto("N - Nao\n", 'r');
     printf(">>> ");
     scanf(" %c", &salvarOpcao);
 
-		if(salvarOpcao == 's' || salvarOpcao == 'S') {
-				salvarAluno(cadastro);
-		}
-}
+    int retorno;  // Verificar se o arquivo foi salvo ou nao
 
+    if (salvarOpcao == 's' || salvarOpcao == 'S') {
+        retorno = salvarAluno(cadastro);
+
+        while (!retorno) {
+            // Tenta salvar o arquivo quando ocorrer algum erro
+
+            system(clear);
+
+            corTexto("Erro ao abrir o arquivo\n", 'r');
+
+            printf("Por favor insira as informacoes do aluno:\n\n");
+
+            printf("CPF (apenas numeros): ");
+            corTexto(cadastro.cpf, 'g');
+            printf("\n");
+
+            printf("Nome: ");
+            corTexto(cadastro.nome, 'g');
+            printf("\n");
+
+            printf("Email (exemplo@exemplo.com): ");
+            corTexto(cadastro.email, 'g');
+            printf("\n\n");
+
+            printf("Deseja salvar esse aluno cadastrado?\n");
+            corTexto("S - Sim\t", 'g');
+            corTexto("N - Nao\n", 'r');
+            printf(">>> ");
+            scanf(" %c", &salvarOpcao);
+
+            if (salvarOpcao == 's' || salvarOpcao == 'S') {
+                retorno = salvarAluno(cadastro);
+            } else if (salvarOpcao == 'n' || salvarOpcao == 'N') {
+                break;
+            }
+        }
+    }
+
+    if (retorno) {
+        *id_aluno += 1;
+    }
+}
 
 int salvarAluno(struct aluno aluno) {
-		FILE *fptr = fopen("./data/aluno.csv", "a");
-		
-		if (fptr == NULL) {
-			corTexto("Erro ao abrir o arquivo\n", 'r');
-			return 0;
-		}
-		
-		fprintf(fptr, "%s,%s,%s\n", aluno.cpf, aluno.nome, aluno.email);
+    // Funcao para salvar o cadastro de alunos em formato CSV
 
-		fclose(fptr);
+    FILE *fptr = fopen("./data/aluno.csv", "a");
 
-		return 1;
+    if (fptr == NULL) {
+        return 0;
+    }
+
+    fprintf(fptr, "%d,%s,%s,%s\n", aluno.id_aluno, aluno.cpf, aluno.nome, aluno.email);
+
+    fclose(fptr);
+
+    return 1;
 }
-

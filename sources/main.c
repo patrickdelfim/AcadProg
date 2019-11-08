@@ -10,6 +10,8 @@
 int main() {
     char input;
 
+    int id_atual_aluno = 1;
+
     do {
         input = menuInicial();
 
@@ -19,7 +21,7 @@ int main() {
             alunoCadastrado.nome = malloc(sizeof(char) * 100);
             alunoCadastrado.email = malloc(sizeof(char) * 100);
 
-            cadastroAluno(alunoCadastrado);
+            cadastroAluno(alunoCadastrado, &id_atual_aluno);
 
             // eu acho que temos que dar um free e salvar o arquivo dentro da funcao cadastroAluno
             // free(alunoCadastrado.cpf);

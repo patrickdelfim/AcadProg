@@ -15,5 +15,5 @@ struct aluno {
     char *email;
 };
 
-void cadastroAluno(struct aluno cadastro);
+void cadastroAluno(struct aluno cadastro, int *id_aluno);
 int salvarAluno(struct aluno aluno);

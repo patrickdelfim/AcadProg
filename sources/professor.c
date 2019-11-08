@@ -2,58 +2,8 @@
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
 
-
-/*
 void cadastroProfessor(struct professor cadastro) {
-
-		system(clear);
-
-		printf("Por favor insira as informacoes do aluno:\n\n");
-
-		printf("CPF (apenas numeros): ");
-		getchar();
-		fgets(cadastro.cpf, 12, stdin);
-
-
-		if (validarCPF(cadastro.cpf) != 1) {
-				while (1) {
-						system(clear);
-
-
-						if (validarCPF(cadastro.cpf) == 1) {
-								break;
-
-						} else if (validarCPF(cadastro.cpf) == 0) {
-								corTexto("O CPF esta invalido", 'r');
-						} else if(validarCPF(cadastro.cpf) == 2) {
-								corTexto("O cpf deve conter 11 numeros.\n", 'r');
-
-						}else if(validarCPF(cadastro.cpf) == 3) {
-
-								corTexto("O cpf nao pode ter letras.\n", 'r');
-								getchar();
-
-						}else if(validarCPF(cadastro.cpf) == 4) {
-
-								corTexto("O cpf nao pode ter numeros iguais.\n", 'r');
-								getchar();
-								
-						}
-
-						printf("Por favor insira as informacoes do professor:\n\n");
-
-						printf("CPF (apenas numeros): ");
-						fgets(cadastro.cpf, 12, stdin);
-
-				}
-		}
-}
-
-*/
-
-
-void cadastroProfessor(struct professor cadastro) {
-		char salvarOpcao;
+    char salvarOpcao;
 
     system(clear);
 
@@ -143,6 +93,10 @@ void cadastroProfessor(struct professor cadastro) {
         fgets(cadastro.email, 100, stdin);
     }
 
+    cadastro.cpf = stringNewLine(cadastro.cpf);
+    cadastro.nome = stringNewLine(cadastro.nome);
+    cadastro.email = stringNewLine(cadastro.email);
+
     system(clear);
 
     printf("Por favor insira as informacoes do professor:\n\n");
@@ -153,39 +107,71 @@ void cadastroProfessor(struct professor cadastro) {
 
     printf("Nome: ");
     corTexto(cadastro.nome, 'g');
+    printf("\n");
 
     printf("Email (exemplo@exemplo.com): ");
     corTexto(cadastro.email, 'g');
-    printf("\n");
+    printf("\n\n");
 
-		cadastro.cpf = stringNewLine(cadastro.cpf);
-		cadastro.nome = stringNewLine(cadastro.nome);
-		cadastro.email = stringNewLine(cadastro.email);
-		
     printf("Deseja salvar esse professor cadastrado?\n");
     corTexto("S - Sim\t", 'g');
     corTexto("N - Nao\n", 'r');
     printf(">>> ");
     scanf(" %c", &salvarOpcao);
 
-		if(salvarOpcao == 's' || salvarOpcao == 'S') {
-				salvarProfessor(cadastro);
-		}
-}
+    int retorno;  // Verificar se o arquivo foi salvo ou nao
 
+    if (salvarOpcao == 's' || salvarOpcao == 'S') {
+        retorno = salvarProfessor(cadastro);
+
+        while (!retorno) {
+            // Tenta salvar o arquivo quando ocorrer algum erro
+
+            system(clear);
+
+            corTexto("Erro ao abrir o arquivo\n", 'r');
+
+            printf("Por favor insira as informacoes do professor:\n\n");
+
+            printf("CPF (apenas numeros): ");
+            corTexto(cadastro.cpf, 'g');
+            printf("\n");
+
+            printf("Nome: ");
+            corTexto(cadastro.nome, 'g');
+            printf("\n");
+
+            printf("Email (exemplo@exemplo.com): ");
+            corTexto(cadastro.email, 'g');
+            printf("\n\n");
+
+            printf("Deseja salvar esse professor cadastrado?\n");
+            corTexto("S - Sim\t", 'g');
+            corTexto("N - Nao\n", 'r');
+            printf(">>> ");
+            scanf(" %c", &salvarOpcao);
+
+            if (salvarOpcao == 's' || salvarOpcao == 'S') {
+                retorno = salvarProfessor(cadastro);
+            } else if (salvarOpcao == 'n' || salvarOpcao == 'N') {
+                break;
+            }
+        }
+    }
+}
 
 int salvarProfessor(struct professor professor) {
-		FILE *fptr = fopen("./data/professor.csv", "a");
-		
-		if (fptr == NULL) {
-			corTexto("Erro ao abrir o arquivo\n", 'r');
-			return 0;
-		}
-		
-		fprintf(fptr, "%s,%s,%s\n", professor.cpf, professor.nome, professor.email);
+    // Funcao para salvar o cadastro de professores em formato CSV
 
-		fclose(fptr);
+    FILE *fptr = fopen("./data/professor.csv", "a");
 
-		return 1;
+    if (fptr == NULL) {
+        return 0;
+    }
+
+    fprintf(fptr, "%s,%s,%s\n", professor.cpf, professor.nome, professor.email);
+
+    fclose(fptr);
+
+    return 1;
 }
-
