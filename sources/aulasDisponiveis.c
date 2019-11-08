@@ -2,6 +2,12 @@
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
 
+
+
+//COMENTARIO TESTE
+
+
+
 void cadastroAula(struct aula cadastro) {
     char salvarOpcao;
 
