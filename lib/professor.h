@@ -9,7 +9,11 @@
 #endif
 
 struct professor {
+    int id_professor;
     char *cpf;
+    char *nome;
+    char *email;
 };
 
 void cadastroProfessor(struct professor cadastro);
+int salvarProfessor(struct professor aluno);
