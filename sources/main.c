@@ -29,14 +29,11 @@ int main() {
             // printf("%s\n", alunoCadastrado.cpf);
             // printf("%s\n", alunoCadastrado.nome);
             // printf("%d\n", strlen(alunoCadastrado.nome)); // Adicionar um realloc no nome do aluno
-        }
-        if (input == '2') {
-            
+        } else if (input == '2') {
             struct professor profCadastrado;
             profCadastrado.cpf = malloc(sizeof(char) * 11);
             profCadastrado.nome = malloc(sizeof(char) * 100);
             profCadastrado.email = malloc(sizeof(char) * 100);
-
 
             cadastroProfessor(profCadastrado);
         }
