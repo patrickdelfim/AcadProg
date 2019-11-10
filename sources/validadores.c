@@ -102,3 +102,52 @@ int validarEMAIL(char *email) {
         return 0;
     }
 }
+
+int validarHorario(char *horario) {
+    int tam = strlen(horario);
+
+    // tamanho de tam dando 40 ????
+
+    printf("o valor de tam eh %d", tam);
+    int num[4];
+    int i = 0;
+
+    /*              transformar a string em vetor de inteiro e
+     verificar se o formato tem 5 caracteres HH:MM e depois se a hora eh valida */
+
+    if (tam == 5) {
+        if (horario[2] == ':') {
+            for (i = 0; i < tam - 3; i++) {
+                num[i] = horario[i] % 48;
+            }
+            for (i = 2; i < tam - 1; i++) {
+                num[i] = horario[i + 1] % 48;
+            }
+
+            if (num[0] >= 0 && num[0] <= 1 && num[1] >= 0 && num[1] <= 9 && num[2] >= 0 && num[2] <= 5 && num[3] >= 0 && num[3] <= 9) {
+                return 1;
+            } else if (num[0] == 2 && num[1] >= 0 && num[1] <= 3 && num[2] >= 0 && num[2] <= 5 && num[3] >= 0 && num[3] <= 9) {
+                return 1;
+            }
+        }
+
+        /*              transformar a string em vetor de inteiro e
+     verificar se o formato tem 4 caracteres H:MM e depois se a hora eh valida */
+
+    } else if (tam == 4) {
+        if (horario[1] == ':') {
+            for (i = 0; i < tam - 3; i++) {
+                num[i] = horario[i] % 48;
+            }
+            for (i = 1; i < tam - 1; i++) {
+                num[i] = horario[i + 1] % 48;
+            }
+
+            if (num[0] >= 1 && num[0] <= 9 && num[1] >= 0 && num[1] <= 5 && num[2] >= 0 && num[2] <= 9) {
+                return 2;
+            }
+        }
+    }
+
+    return 0;
+}
