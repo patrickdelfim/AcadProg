@@ -44,7 +44,18 @@ int main() {
             aulaCadastro.horario = malloc(sizeof(char) * 5);
 
             cadastroAula(aulaCadastro);
-        }
+        } else if (input == '0') {
+			char *str = concat("O","I");
+
+/* 			for(int i = 0; i < 8; i++) { */
+/* 				if (str[i] == '\0') */
+/* 					printf("contra-barra zero\n"); */
+/* 				else */
+/* 					printf("%c\n", str[i]); */
+/* 			} */
+
+			break;
+		}
 
     } while (input != 'x' && input != 'X');
 

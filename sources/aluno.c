@@ -3,7 +3,7 @@
 #include "../lib/validadores.h"
 
 void cadastroAluno(struct aluno cadastro) {
-		char salvarOpcao;
+    char salvarOpcao;
 
     system(clear);
 
