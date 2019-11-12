@@ -15,21 +15,49 @@ void corTexto(char *texto, char opcao) {
 }
 
 char *stringNewLine(char *str) {
-		// Funcao para remover o \n
-		
-		int len = strlen(str);
+    // Funcao para remover o \n
 
-		if (str[len - 1] != '\n') {
-				return str;
-		}
+    int len = strlen(str);
 
-		str[len - 1] = '\0';
+    if (str[len - 1] != '\n') {
+        return str;
+    }
 
-		return str;
+    str[len - 1] = '\0';
+
+    return str;
 }
 
 void cleanBuffer() {
-		char c;
-		while((c = getchar()) != '\n' && c == EOF);
+    char c;
+    while ((c = getchar()) != '\n' && c == EOF)
+        ;
 }
 
+void diaSemana(dia) {
+    switch (dia) {
+        case 1:
+            corTexto("Domingo", 'g');
+            break;
+        case 2:
+            corTexto("Segunda-feira", 'g');
+            break;
+        case 3:
+            corTexto("Terca-feira", 'g');
+            break;
+        case 4:
+            corTexto("Quarta-feira", 'g');
+            break;
+        case 5:
+            corTexto("Quinta-feira", 'g');
+            break;
+        case 6:
+            corTexto("Sexta-feira", 'g');
+            break;
+        case 7:
+            corTexto("Sabado", 'g');
+            break;
+        default:
+            printf("Error!");
+    }
+}
