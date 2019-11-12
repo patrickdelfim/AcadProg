@@ -39,13 +39,13 @@ char *concat(char *str1,char *str2){
 
 	pq n funciona ????
 
-	char *retorno; 
+	char *retorno; // size of = 8
 	int tamTotal = strlen(str1) + strlen(str2); 
 
 	retorno = malloc(tamTotal + 1); */
 
 	int tamTotal = strlen(str1) + strlen(str2);
-    char retorno[tamTotal];
+    char retorno[tamTotal]; // size of = 2
 
 
     strncpy(retorno,str1,tamTotal);
@@ -57,13 +57,31 @@ char *concat(char *str1,char *str2){
     return retorno;
 }
 
-int ultimoId(char *nomeArquivo) {
+int ultimoId(char *caminho) {
 	// TODO:
+	FILE *arq = fopen(concat("data/", caminho), "r");
 
-	return 0;
+	if(arq == NULL) {
+		return -1;
+	}
+
+	int id = 0, maiorId = 0;
+
+	do {
+		fscanf(arq, "%d,%*s,%*s,%*s\n", &maiorId);
+		if (maiorId > id) {
+			id = maiorId;
+		}
+		if(getchar() == 'x')
+			break;
+
+		printf("%d\n", maiorId);
+	} while (!feof(arq));
+
+	return id;
 }
 
-void diaSemana(dia) {
+void diaSemana(int dia) {
     switch (dia) {
         case 1:
             corTexto("Domingo", 'g');

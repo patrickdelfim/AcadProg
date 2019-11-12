@@ -46,7 +46,8 @@ int main() {
 
             cadastroAula(aulaCadastro);
         } else if (input == '0') {
-			char *str = concat("O","I");
+			getchar();
+			printf("%d\n", ultimoId("aluno.csv"));
 
 /* 			for(int i = 0; i < 8; i++) { */
 /* 				if (str[i] == '\0') */
