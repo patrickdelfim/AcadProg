@@ -6,4 +6,5 @@ char *stringNewLine(char *str);
 void cleanBuffer();
 char *concat(char *str1,char *str2);
 int ultimoId(char *nomeArquivo);
+void diaSemana(dia);
 

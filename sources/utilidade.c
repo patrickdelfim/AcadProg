@@ -63,3 +63,30 @@ int ultimoId(char *nomeArquivo) {
 	return 0;
 }
 
+void diaSemana(dia) {
+    switch (dia) {
+        case 1:
+            corTexto("Domingo", 'g');
+            break;
+        case 2:
+            corTexto("Segunda-feira", 'g');
+            break;
+        case 3:
+            corTexto("Terca-feira", 'g');
+            break;
+        case 4:
+            corTexto("Quarta-feira", 'g');
+            break;
+        case 5:
+            corTexto("Quinta-feira", 'g');
+            break;
+        case 6:
+            corTexto("Sexta-feira", 'g');
+            break;
+        case 7:
+            corTexto("Sabado", 'g');
+            break;
+        default:
+            printf("Error!");
+    }
+}
