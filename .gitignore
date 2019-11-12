@@ -1,3 +1,7 @@
 AcadProg*
 objects/*.o
 data/*
+**/.DS_Store
+.DS_Store
+.vscode/*
+.vscode

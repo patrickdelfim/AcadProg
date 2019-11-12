@@ -1,3 +1,4 @@
+#include <stdio.h>
 void corTexto(char *texto, char opcao) {
     switch (opcao) {
         case 'r':
@@ -25,5 +26,10 @@ char *stringNewLine(char *str) {
 		str[len - 1] = '\0';
 
 		return str;
+}
+
+void cleanBuffer() {
+		char c;
+		while((c = getchar()) != '\n' && c == EOF);
 }
 

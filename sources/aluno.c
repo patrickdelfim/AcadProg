@@ -12,10 +12,10 @@ void cadastroAluno(struct aluno cadastro) {
     printf("CPF (apenas numeros): ");
     getchar();
     fgets(cadastro.cpf, 12, stdin);
-
     if (validarCPF(cadastro.cpf) != 1) {
         while (1) {
             system(clear);
+
             if (validarCPF(cadastro.cpf) == 1) {
                 break;
             } else if (validarCPF(cadastro.cpf) == 0) {
@@ -89,7 +89,7 @@ void cadastroAluno(struct aluno cadastro) {
         printf("Nome: ");
         corTexto(cadastro.nome, 'g');
 
-        printf("Email: ");
+        printf("Email (exemplo@exemplo.com): ");
         fgets(cadastro.email, 100, stdin);
     }
 
@@ -104,7 +104,7 @@ void cadastroAluno(struct aluno cadastro) {
     printf("Nome: ");
     corTexto(cadastro.nome, 'g');
 
-    printf("Email (exemplo@exemplo.com): ");
+    printf("Email: ");
     corTexto(cadastro.email, 'g');
     printf("\n");
 

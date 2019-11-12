@@ -16,7 +16,7 @@ int main() {
 
         if (input == '1') {
             struct aluno alunoCadastrado;
-            alunoCadastrado.cpf = malloc(sizeof(char) * 11);
+            alunoCadastrado.cpf = malloc(sizeof(char) * 12);
             alunoCadastrado.nome = malloc(sizeof(char) * 100);
             alunoCadastrado.email = malloc(sizeof(char) * 100);
 
@@ -32,7 +32,7 @@ int main() {
             // printf("%d\n", strlen(alunoCadastrado.nome)); // Adicionar um realloc no nome do aluno
         } else if (input == '2') {
             struct professor profCadastrado;
-            profCadastrado.cpf = malloc(sizeof(char) * 11);
+            profCadastrado.cpf = malloc(sizeof(char) * 12);
             profCadastrado.nome = malloc(sizeof(char) * 100);
             profCadastrado.email = malloc(sizeof(char) * 100);
 
