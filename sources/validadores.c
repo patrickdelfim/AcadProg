@@ -108,8 +108,7 @@ int validarHorario(char *horario) {
 
     // tamanho de tam dando 40 ????
 
-    printf("o valor de tam eh %d", tam);
-    int num[4];
+        int num[4];
     int i = 0;
 
     /*              transformar a string em vetor de inteiro e

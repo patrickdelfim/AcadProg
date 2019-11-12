@@ -109,24 +109,29 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Horario da aula no formato HH:MM: ");
     getchar();
-    fgets(cadastro.horario, 5, stdin);
+    fgets(cadastro.horario, 6, stdin);
 
     int teste = validarHorario(cadastro.horario);
 
-    /* funcao validarHorario dando errado. */
+    printf("\n teste eh :%d \n", teste);
 
+    /* funcao validarHorario dando errado. */
     /*
-    while (validarHorario(cadastro.horario) != 1 && validarHorario(cadastro.horario) != 2) {
+    while (validarHorario(cadastro.horario) != 1 || validarHorario(cadastro.horario) != 2) {
         system(clear);
+        
 
         if (validarHorario(cadastro.horario) == 1) {
             break;
+
         } else if (validarHorario(cadastro.horario) == 2) {
-            Adicionar procedimento para adicionar 0 antes do numero de horario caso a verificadao
-                retorne 2
+            /
+            Adicionar procedimento para adicionar 0 antes do numero de horario caso a verificadao 
+            retorne 2;
+            
 
             break;
-        } else if (validarHorario(cadastro.horario) == 2) {
+        } else if (validarHorario(cadastro.horario) == 0) {
             corTexto("O formato do horario inserido esta incorreto \n", 'r');
             getchar();
         }
@@ -134,8 +139,30 @@ void cadastroAula(struct aula cadastro) {
         printf("Por favor insira as informacoes da aula:\n\n");
 
         printf("Horario da aula no formato HH:MM: ");
-        fgets(cadastro.horario, 5, stdin);
+        getchar();
+        fgets(cadastro.horario, 6, stdin);
     }
+    */
 
-*/
+    if (validarHorario(cadastro.horario) != 1 && validarHorario(cadastro.horario) != 2) {
+        while (1) {
+            system(clear);
+            if (validarHorario(cadastro.horario) == 1) {
+                printf("\n teste1 eh :%d \n", teste);
+                break;
+            } else if (validarHorario(cadastro.horario) == 2) {
+                printf("\n teste2 eh :%d \n", teste);
+                break;
+            } else if (validarHorario(cadastro.horario) == 0) {
+                printf("\n teste eh3 :%d \n", teste);
+                corTexto("O formato do horario inserido esta incorreto \n", 'r');
+                getchar();
+            }
+            printf("\n teste eh4 :%d \n", teste);
+            printf("Por favor insira as informacoes da aula:\n\n");
+
+            printf("Horario da aula no formato HH:MM: ");
+            fgets(cadastro.horario, 6, stdin);
+        }
+    }
 }
