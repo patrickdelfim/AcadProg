@@ -12,6 +12,12 @@ void corTexto(char *texto, char opcao) {
             printf("%s", texto);
             printf("\e[0m");
             break;
+        case 'y':
+            printf("\e[0;93m");
+            printf("%s", texto);
+            printf("\e[0m");
+            break;
+
     }
 }
 

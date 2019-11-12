@@ -13,7 +13,7 @@ void cadastroAula(struct aula cadastro) {
     printf("A - Artes Maciais\n");
     printf("B - Boxe\n");
     printf("C - Crossfit\n");
-    printf("D - Dança\n");
+    printf("D - Danca\n");
 
     printf(">>> ");
     scanf(" %c", &cadastro.tipo);
