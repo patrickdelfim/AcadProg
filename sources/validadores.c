@@ -71,36 +71,43 @@ int validarCPF(char *cpf) {
 
 int validarEMAIL(char *email) {
     int tam = strlen(email);
-    int valido = 0, depoisArroba = tam, depoisPonto = tam;
+    int arroba = 0;
+    int ponto = 0; 
+    int antesPonto = 0; 
+    int depoisPonto = 0; 
+    int i;
+ 
+  for (i = 0; i < tam; i++) {
+    char c = email[i];
+    if(c == '@') { // Verifica se tem arroba
+      if (arroba)  
+        break; 
 
-    for (int i = 0; i < tam; i++) {
-        /* pelo menos 3 caracteres antes do arroba para ser um email valido.*/
+      arroba = 1;
 
-        if (i > 3) {
-            /* verifica se o email tem arroba*/
-            if (email[i] == '@') {
-                valido++;
-                depoisArroba = i;
-            }
-            /* verifica se o email tem pelo menos 2 caracteres depois do arroba e tambem ponto*/
-            if (i > depoisArroba + 2) {
-                if (email[i] == '.') {
-                    valido++;
-                    depoisPonto = i;
-                }
-            }
-            /* verifica se o email tem pelo menos 2 caracteres depois do ponto*/
-            if (i > depoisPonto + 2) {
-                valido++;
-            }
-        }
-    }
+      if (i < 3)  // Verifica se tem 3 letras antes do arroba;
+       break; 
 
-    if (valido >= 3) {
-        return 1;
+    } else if (arroba){
+      if (ponto) { 
+        depoisPonto++;
+
+    }else if(c == '.') {
+      ponto = 1;
+      if (antesPonto < 3) { //Verifica se tem 3 letras antes do ponto
+      break;
+      }
+
     } else {
-        return 0;
+      antesPonto++;
+      }
     }
+  }
+ 
+  if (i == tam && depoisPonto > 1)
+    return 1;
+  else
+    return 0;
 }
 
 int validarHorario(char *horario) {
