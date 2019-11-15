@@ -125,54 +125,70 @@ void cadastroAula(struct aula cadastro) {
     scanf("%d", &cadastro.id_prof);
 
     /* Cadastro min turma */
+    cadastro.minimo = 1000;
+    cadastro.maximo = 0;
+    int status = 0;
 
-    system(clear);
+    while (cadastro.minimo > cadastro.maximo) {
+        system(clear);
 
-    printf("Por favor insira as informacoes da aula:\n\n");
+        if (status == 1) {
+            corTexto("O numero minimo de pessoas na aula eh maior que o numero maximo de pessoas \n", 'r');
+        }
 
-    printf("tipo da aula: %c", cadastro.tipo);
-    printf("\n");
+        printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("dia da semana: ");
-    diaSemana(cadastro.dia);
-    printf("\n");
+        printf("tipo da aula: %c", cadastro.tipo);
+        printf("\n");
 
-    printf("Horario da aula: ");
-    corTexto(cadastro.horario, 'g');
-    printf("\n");
+        printf("dia da semana: ");
+        diaSemana(cadastro.dia);
+        printf("\n");
 
-    printf("ID Professor: %d", cadastro.id_prof);
-    printf("\n");
+        printf("Horario da aula: ");
+        corTexto(cadastro.horario, 'g');
+        printf("\n");
 
-    printf("Minimo de pessoas na aula: ");
-    scanf("%d", &cadastro.minimo);
+        printf("ID Professor: %d", cadastro.id_prof);
+        printf("\n");
 
-    /* Cadastro Max turma */
+        printf("Minimo de pessoas na aula: ");
+        scanf("%d", &cadastro.minimo);
 
-    system(clear);
+        /* Cadastro Max turma */
 
-    printf("Por favor insira as informacoes da aula:\n\n");
+        system(clear);
 
-    printf("tipo da aula: %c", cadastro.tipo);
-    printf("\n");
+        if (status == 1) {
+            corTexto("O numero minimo de pessoas na aula eh maior que o numero maximo de pessoas \n", 'r');
+        }
 
-    printf("dia da semana: ");
-    diaSemana(cadastro.dia);
-    printf("\n");
+        printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("Horario da aula: ");
-    corTexto(cadastro.horario, 'g');
-    printf("\n");
+        printf("tipo da aula: %c", cadastro.tipo);
+        printf("\n");
 
-    printf("ID Professor: %d", cadastro.id_prof);
-    printf("\n");
+        printf("dia da semana: ");
+        diaSemana(cadastro.dia);
+        printf("\n");
 
-    printf("Minimo de pessoas na aula: %d", cadastro.minimo);
-    printf("\n");
+        printf("Horario da aula: ");
+        corTexto(cadastro.horario, 'g');
+        printf("\n");
 
-    printf("Maximo de pessoas na aula: ");
-    scanf("%d", &cadastro.maximo);
+        printf("ID Professor: %d", cadastro.id_prof);
+        printf("\n");
 
+        printf("Minimo de pessoas na aula: %d", cadastro.minimo);
+        printf("\n");
+
+        printf("Maximo de pessoas na aula: ");
+        scanf("%d", &cadastro.maximo);
+
+        if (cadastro.minimo > cadastro.maximo) {
+            status = 1;
+        }
+    }
     /*
     Verificar que sempre o numero cadastro.maximo deve ter maior que
                     cadastro.minimo
