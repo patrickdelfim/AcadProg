@@ -38,13 +38,13 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("tipo da aula: %c", cadastro.tipo);
+    charTipo(cadastro.tipo);
     /* corTexto(cadastro.tipo, 'g'); */
     printf("\n");
     //getchar();
 
     printf("Digite o dia da semana: \n");
-    printf("1 - domingo\n");
+    printf("1 - Domingo\n");
     printf("2 - Segunda\n");
     printf("3 - Terca\n");
     printf("4 - Quarta\n");
@@ -75,10 +75,10 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("tipo da aula: %c", cadastro.tipo);
+    charTipo(cadastro.tipo);
     printf("\n");
 
-    printf("dia da semana: ");
+    printf("Dia da semana: ");
     diaSemana(cadastro.dia);
 
     printf("\n");
@@ -105,10 +105,10 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("tipo da aula: %c", cadastro.tipo);
+    charTipo(cadastro.tipo);
     printf("\n");
 
-    printf("dia da semana: ");
+    printf("Dia da semana: ");
     diaSemana(cadastro.dia);
     printf("\n");
 
@@ -138,10 +138,10 @@ void cadastroAula(struct aula cadastro) {
 
         printf("Por favor insira as informacoes da aula:\n\n");
 
-        printf("tipo da aula: %c", cadastro.tipo);
+        charTipo(cadastro.tipo);
         printf("\n");
 
-        printf("dia da semana: ");
+        printf("Dia da semana: ");
         diaSemana(cadastro.dia);
         printf("\n");
 
@@ -165,10 +165,10 @@ void cadastroAula(struct aula cadastro) {
 
         printf("Por favor insira as informacoes da aula:\n\n");
 
-        printf("tipo da aula: %c", cadastro.tipo);
+        charTipo(cadastro.tipo);
         printf("\n");
 
-        printf("dia da semana: ");
+        printf("Dia da semana: ");
         diaSemana(cadastro.dia);
         printf("\n");
 
@@ -200,10 +200,10 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("tipo da aula: %c", cadastro.tipo);
+    charTipo(cadastro.tipo);
     printf("\n");
 
-    printf("dia da semana: ");
+    printf("Dia da semana: ");
     diaSemana(cadastro.dia);
     printf("\n");
 
@@ -230,10 +230,10 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("tipo da aula: %c", cadastro.tipo);
+    charTipo(cadastro.tipo);
     printf("\n");
 
-    printf("dia da semana: ");
+    printf("Dia da semana: ");
     diaSemana(cadastro.dia);
     printf("\n");
 
@@ -282,4 +282,18 @@ int salvarAula(struct aula aula) {
     fclose(fptr);
 
     return 1;
+}
+
+// converter char para nome de categoria de aula
+
+void charTipo(char tipo){
+    if(tipo == 'A'){
+        printf("Tipo da aula : Artes Maciais");
+    }else if(tipo == 'B'){
+        printf("Tipo da aula : Boxe");
+    }else if(tipo == 'C'){
+        printf("Tipo da aula : CrossFit");
+    }else if(tipo == 'D'){
+        printf("Tipo da aula : Danca");  
+    }
 }
