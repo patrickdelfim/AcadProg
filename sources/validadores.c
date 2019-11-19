@@ -71,44 +71,50 @@ int validarCPF(char *cpf) {
 
 int validarEMAIL(char *email) {
     int tam = strlen(email);
-    int valido = 0, depoisArroba = tam, depoisPonto = tam;
+    int arroba = 0;
+    int ponto = 0;
+    int antesPonto = 0;
+    int depoisPonto = 0;
+    int i;
 
-    for (int i = 0; i < tam; i++) {
-        /* pelo menos 3 caracteres antes do arroba para ser um email valido.*/
+    for (i = 0; i < tam; i++) {
+        char c = email[i];
+        if (c == '@') {  // Verifica se tem arroba
+            if (arroba)
+                break;
 
-        if (i > 3) {
-            /* verifica se o email tem arroba*/
-            if (email[i] == '@') {
-                valido++;
-                depoisArroba = i;
-            }
-            /* verifica se o email tem pelo menos 2 caracteres depois do arroba e tambem ponto*/
-            if (i > depoisArroba + 2) {
-                if (email[i] == '.') {
-                    valido++;
-                    depoisPonto = i;
+            arroba = 1;
+
+            if (i < 3)  // Verifica se tem 3 letras antes do arroba;
+                break;
+
+        } else if (arroba) {
+            if (ponto) {
+                depoisPonto++;
+
+            } else if (c == '.') {
+                ponto = 1;
+                if (antesPonto < 3) {  //Verifica se tem 3 letras antes do ponto
+                    break;
                 }
-            }
-            /* verifica se o email tem pelo menos 2 caracteres depois do ponto*/
-            if (i > depoisPonto + 2) {
-                valido++;
+
+            } else {
+                antesPonto++;
             }
         }
     }
 
-    if (valido >= 3) {
+    if (i == tam && depoisPonto > 1)
         return 1;
-    } else {
+    else
         return 0;
-    }
 }
 
 int validarHorario(char *horario) {
     int tam = strlen(horario);
 
-    // tamanho de tam dando 40 ????
+        // tamanho de tam dando 40 ????
 
-    printf("o valor de tam eh %d", tam);
     int num[4];
     int i = 0;
 
@@ -133,7 +139,7 @@ int validarHorario(char *horario) {
 
         /*              transformar a string em vetor de inteiro e
      verificar se o formato tem 4 caracteres H:MM e depois se a hora eh valida */
-
+        /*
     } else if (tam == 4) {
         if (horario[1] == ':') {
             for (i = 0; i < tam - 3; i++) {
@@ -146,7 +152,7 @@ int validarHorario(char *horario) {
             if (num[0] >= 1 && num[0] <= 9 && num[1] >= 0 && num[1] <= 5 && num[2] >= 0 && num[2] <= 9) {
                 return 2;
             }
-        }
+        }*/
     }
 
     return 0;

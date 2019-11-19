@@ -11,8 +11,10 @@ char menuInicial() {
     printf("Bem Vindo!\n\n");
     printf("Escolha uma opcao:\n");
 
+    corTexto("0 - Teste\n", 'y');
     printf("1 - Cadastro de aluno\n");
     printf("2 - Cadastro de professor\n");
+    printf("3 - Cadastro de aula\n");
 
     corTexto("\nX - Sair\n", 'r');
 

@@ -13,7 +13,7 @@ void cadastroAula(struct aula cadastro) {
     printf("A - Artes Maciais\n");
     printf("B - Boxe\n");
     printf("C - Crossfit\n");
-    printf("D - Dança\n");
+    printf("D - Danca\n");
 
     printf(">>> ");
     scanf(" %c", &cadastro.tipo);
@@ -38,13 +38,13 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("tipo da aula: %c", cadastro.tipo);
+    charTipo(cadastro.tipo);
     /* corTexto(cadastro.tipo, 'g'); */
     printf("\n");
     //getchar();
 
     printf("Digite o dia da semana: \n");
-    printf("1 - domingo\n");
+    printf("1 - Domingo\n");
     printf("2 - Segunda\n");
     printf("3 - Terca\n");
     printf("4 - Quarta\n");
@@ -75,67 +75,225 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("tipo da aula: %c", cadastro.tipo);
+    charTipo(cadastro.tipo);
     printf("\n");
 
-    printf("dia da semana: ");
-    switch (cadastro.dia) {
-        case 1:
-            corTexto("Domingo", 'g');
-            break;
-        case 2:
-            corTexto("Segunda-feira", 'g');
-            break;
-        case 3:
-            corTexto("Terca-feira", 'g');
-            break;
-        case 4:
-            corTexto("Quarta-feira", 'g');
-            break;
-        case 5:
-            corTexto("Quinta-feira", 'g');
-            break;
-        case 6:
-            corTexto("Sexta-feira", 'g');
-            break;
-        case 7:
-            corTexto("Sabado", 'g');
-            break;
-        default:
-            printf("Error! deu ruim lelek");
-    }
+    printf("Dia da semana: ");
+    diaSemana(cadastro.dia);
 
     printf("\n");
 
     printf("Horario da aula no formato HH:MM: ");
     getchar();
-    fgets(cadastro.horario, 5, stdin);
+    fgets(cadastro.horario, 6, stdin);
 
-    int teste = validarHorario(cadastro.horario);
+    /* funcao validarHorario. */
 
-    /* funcao validarHorario dando errado. */
-
-    /*
-    while (validarHorario(cadastro.horario) != 1 && validarHorario(cadastro.horario) != 2) {
+    while (validarHorario(cadastro.horario) != 1) {
         system(clear);
 
-        if (validarHorario(cadastro.horario) == 1) {
-            break;
-        } else if (validarHorario(cadastro.horario) == 2) {
-            Adicionar procedimento para adicionar 0 antes do numero de horario caso a verificadao
-                retorne 2
+        corTexto("O formato do horario inserido esta incorreto \n", 'r');
 
-            break;
-        } else if (validarHorario(cadastro.horario) == 2) {
-            corTexto("O formato do horario inserido esta incorreto \n", 'r');
-            getchar();
+        printf("Por favor insira as informacoes da aula:\n\n");
+        printf("Horario da aula no formato HH:MM: ");
+        fgets(cadastro.horario, 6, stdin);
+    }
+
+    /* Cadastro id professor */
+
+    system(clear);
+
+    printf("Por favor insira as informacoes da aula:\n\n");
+
+    charTipo(cadastro.tipo);
+    printf("\n");
+
+    printf("Dia da semana: ");
+    diaSemana(cadastro.dia);
+    printf("\n");
+
+    printf("Horario da aula: ");
+    corTexto(cadastro.horario, 'g');
+    printf("\n");
+
+    /*=========================================
+       Printar na tela a lista de professores 
+                antes do imput
+    ===========================================*/
+
+    printf("Cadastro ID Professor: ");
+    scanf("%d", &cadastro.id_prof);
+
+    /* Cadastro min turma */
+    cadastro.minimo = 1000;
+    cadastro.maximo = 0;
+    int status = 0;
+
+    while (cadastro.minimo > cadastro.maximo) {
+        system(clear);
+
+        if (status == 1) {
+            corTexto("O numero minimo de pessoas na aula eh maior que o numero maximo de pessoas \n", 'r');
         }
 
         printf("Por favor insira as informacoes da aula:\n\n");
 
-        printf("Horario da aula no formato HH:MM: ");
-        fgets(cadastro.horario, 5, stdin);
+        charTipo(cadastro.tipo);
+        printf("\n");
+
+        printf("Dia da semana: ");
+        diaSemana(cadastro.dia);
+        printf("\n");
+
+        printf("Horario da aula: ");
+        corTexto(cadastro.horario, 'g');
+        printf("\n");
+
+        printf("ID Professor: %d", cadastro.id_prof);
+        printf("\n");
+
+        printf("Minimo de pessoas na aula: ");
+        scanf("%d", &cadastro.minimo);
+
+        /* Cadastro Max turma */
+
+        system(clear);
+
+        if (status == 1) {
+            corTexto("O numero minimo de pessoas na aula eh maior que o numero maximo de pessoas \n", 'r');
+        }
+
+        printf("Por favor insira as informacoes da aula:\n\n");
+
+        charTipo(cadastro.tipo);
+        printf("\n");
+
+        printf("Dia da semana: ");
+        diaSemana(cadastro.dia);
+        printf("\n");
+
+        printf("Horario da aula: ");
+        corTexto(cadastro.horario, 'g');
+        printf("\n");
+
+        printf("ID Professor: %d", cadastro.id_prof);
+        printf("\n");
+
+        printf("Minimo de pessoas na aula: %d", cadastro.minimo);
+        printf("\n");
+
+        printf("Maximo de pessoas na aula: ");
+        scanf("%d", &cadastro.maximo);
+
+        if (cadastro.minimo > cadastro.maximo) {
+            status = 1;
+        }
+    }
+    /*
+    Verificar que sempre o numero cadastro.maximo deve ter maior que
+                    cadastro.minimo
+     */
+
+    /* Cadastro Faixa etaria */
+
+    system(clear);
+
+    printf("Por favor insira as informacoes da aula:\n\n");
+
+    charTipo(cadastro.tipo);
+    printf("\n");
+
+    printf("Dia da semana: ");
+    diaSemana(cadastro.dia);
+    printf("\n");
+
+    printf("Horario da aula: ");
+    corTexto(cadastro.horario, 'g');
+    printf("\n");
+
+    printf("ID Professor: %d", cadastro.id_prof);
+    printf("\n");
+
+    printf("Minimo de pessoas na aula: %d", cadastro.minimo);
+    printf("\n");
+
+    printf("Maximo de pessoas na aula: %d", cadastro.maximo);
+    printf("\n");
+
+    printf("Faixa etaria da aula no formato XX-XX: ");
+    getchar();
+    fgets(cadastro.faixa_etaria, 6, stdin);
+
+    /* validacao e salvamento */
+
+    system(clear);
+
+    printf("Por favor insira as informacoes da aula:\n\n");
+
+    charTipo(cadastro.tipo);
+    printf("\n");
+
+    printf("Dia da semana: ");
+    diaSemana(cadastro.dia);
+    printf("\n");
+
+    printf("Horario da aula: ");
+    corTexto(cadastro.horario, 'g');
+    printf("\n");
+
+    printf("ID Professor: %d", cadastro.id_prof);
+    printf("\n");
+
+    printf("Minimo de pessoas na aula: %d", cadastro.minimo);
+    printf("\n");
+
+    printf("Maximo de pessoas na aula: %d", cadastro.maximo);
+    printf("\n");
+
+    printf("Faixa etaria da aula: ");
+    corTexto(cadastro.faixa_etaria, 'g');
+    printf("\n");
+
+    cadastro.horario = stringNewLine(cadastro.horario);
+    cadastro.faixa_etaria = stringNewLine(cadastro.faixa_etaria);
+
+    printf("Deseja salvar essa aula cadastrada?\n");
+    corTexto("S - Sim\t", 'g');
+    corTexto("N - Nao\n", 'r');
+    printf(">>> ");
+    scanf(" %c", &salvarOpcao);
+
+    if (salvarOpcao == 's' || salvarOpcao == 'S') {
+        salvarAula(cadastro);
+    }
+}
+
+int salvarAula(struct aula aula) {
+    FILE *fptr = fopen("./data/aulas.csv", "a");
+
+    if (fptr == NULL) {
+        corTexto("Erro ao abrir o arquivo\n", 'r');
+        return 0;
     }
 
-*/
+    fprintf(fptr, "%c,%d,%s,%d,%d,%d,%s\n", aula.tipo, aula.dia, aula.horario, aula.id_prof,
+            aula.minimo, aula.maximo, aula.faixa_etaria);
+
+    fclose(fptr);
+
+    return 1;
+}
+
+// converter char para nome de categoria de aula
+
+void charTipo(char tipo){
+    if(tipo == 'A'){
+        printf("Tipo da aula : Artes Maciais");
+    }else if(tipo == 'B'){
+        printf("Tipo da aula : Boxe");
+    }else if(tipo == 'C'){
+        printf("Tipo da aula : CrossFit");
+    }else if(tipo == 'D'){
+        printf("Tipo da aula : Danca");  
+    }
 }

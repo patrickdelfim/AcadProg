@@ -25,4 +25,5 @@ struct aula {
 
 void cadastroAula(struct aula cadastro);
 int salvarAula(struct aula aula);
+void charTipo(char tipo);
 
