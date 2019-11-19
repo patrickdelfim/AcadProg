@@ -15,6 +15,10 @@ char menuInicial() {
     printf("1 - Cadastro de aluno\n");
     printf("2 - Cadastro de professor\n");
     printf("3 - Cadastro de aula\n");
+    printf("4 - Inscrever aluno\n");
+    printf("5 - Cancelar inscricao\n");
+    printf("6 - Fechar turmas\n");
+    printf("7 - Turmas Confirmadas\n");
 
     corTexto("\nX - Sair\n", 'r');
 
