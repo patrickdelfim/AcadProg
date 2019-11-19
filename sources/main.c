@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 /*Prototipos em lib*/
 #include "../lib/aluno.h"
@@ -9,10 +10,11 @@
 #include "../lib/validadores.h"
 
 int main() {
+	criarData();
+
     char input;
 
-    int id_atual_aluno = 1;
-
+    int id_atual_aluno = ultimoId("aluno.csv");
     do {
         input = menuInicial();
 
@@ -50,6 +52,7 @@ int main() {
         } else if (input == '0') {
 			getchar();
 			printf("%d\n", ultimoId("aluno.csv"));
+			printf("%d\n", id_atual_aluno);
 
 /* 			for(int i = 0; i < 8; i++) { */
 /* 				if (str[i] == '\0') */
