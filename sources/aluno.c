@@ -2,7 +2,7 @@
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
 
-void cadastroAluno(struct aluno cadastro) {
+void cadastroAluno(struct aluno cadastro, int *id_aluno) {
     char salvarOpcao;
 
     system(clear);
@@ -31,23 +31,7 @@ void cadastroAluno(struct aluno cadastro) {
 
             printf("CPF (apenas numeros): ");
             fgets(cadastro.cpf, 12, stdin);
-
-            /*** TODO: 
-	       * transformar o código abaixo em uma função 
-	       * refatorar o loop para utilizar apenas um fgets
-	       * testar com os diversos tipos de input 
-	    ***/
-
-            //fgets executa até newline, o que quer dizer que \n não será lido na primeira iteração do fgets
-            char *pn;
-            if ((pn=strchr(cadastro.cpf, '\n')) != NULL)   // se \n for encontrado, será substituido por \n
-               *pn = '\0';
-            else{                                           // caso \n não seja encontrado, quer dizer que tivemos nosso input truncado
-               int ch;
-               while (((ch = getchar()) != EOF) && (ch != '\n')); // então devemos remover tudo que sobrar em stdin
-             }
-             // debug
-             //fprintf(stderr, "\ntamString:%ld string lida [%s]\n",strlen(cadastro.cpf),cadastro.cpf);
+            cleanBuffer(cadastro.cpf);
         }
     }
 

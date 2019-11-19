@@ -17,30 +17,42 @@ void corTexto(char *texto, char opcao) {
             printf("%s", texto);
             printf("\e[0m");
             break;
-
     }
 }
 
 char *stringNewLine(char *str) {
-	// Funcao para remover o \n
-	
-	int len = strlen(str);
+    // Funcao para remover o \n
 
-	if (str[len - 1] != '\n') {
-		return str;
-	}
+    int len = strlen(str);
 
-	str[len - 1] = '\0';
+    if (str[len - 1] != '\n') {
+        return str;
+    }
 
-	return str;
+    str[len - 1] = '\0';
+
+    return str;
 }
 
-void cleanBuffer() {
-	char c;
-	while((c = getchar()) != '\n' && c == EOF);
+void cleanBuffer(char *str) {
+    //fgets executa até newline, o que quer dizer que \n não será lido na primeira iteração do fgets
+    char *pn;
+    if ((pn = strchr(str, '\n')) != NULL)
+        // se \n for encontrado, será substituido por \n
+        *pn = '\0';
+    else {
+        // caso \n não seja encontrado, quer dizer que tivemos nosso input truncado
+        int ch;
+
+        // então devemos remover tudo que sobrar em stdin
+        while (((ch = getchar()) != EOF) && (ch != '\n'))
+            ;
+    }
+    // debug
+    //fprintf(stderr, "\ntamString:%ld string lida [%s]\n",strlen(cadastro.cpf),cadastro.cpf);
 }
 
-char *concat(char *str1,char *str2){
+char *concat(char *str1, char *str2) {
     /*
 
 	pq n funciona ????
@@ -50,41 +62,40 @@ char *concat(char *str1,char *str2){
 
 	retorno = malloc(tamTotal + 1); */
 
-	int tamTotal = strlen(str1) + strlen(str2);
-    char retorno[tamTotal]; // size of = 2
+    int tamTotal = strlen(str1) + strlen(str2);
+    char retorno[tamTotal];  // size of = 2
 
+    strncpy(retorno, str1, tamTotal);
 
-    strncpy(retorno,str1,tamTotal);
-
-    if(strlen(str1) < tamTotal){
-        strncat(retorno,str2,tamTotal - strlen(retorno));
+    if (strlen(str1) < tamTotal) {
+        strncat(retorno, str2, tamTotal - strlen(retorno));
     }
 
     return retorno;
 }
 
 int ultimoId(char *caminho) {
-	// TODO:
-	FILE *arq = fopen(concat("data/", caminho), "r");
+    // TODO:
+    FILE *arq = fopen(concat("data/", caminho), "r");
 
-	if(arq == NULL) {
-		return -1;
-	}
+    if (arq == NULL) {
+        return -1;
+    }
 
-	int id = 0, maiorId = 0;
+    int id = 0, maiorId = 0;
 
-	do {
-		fscanf(arq, "%d,%*s,%*s,%*s\n", &maiorId);
-		if (maiorId > id) {
-			id = maiorId;
-		}
-		if(getchar() == 'x')
-			break;
+    do {
+        fscanf(arq, "%d,%*s,%*s,%*s\n", &maiorId);
+        if (maiorId > id) {
+            id = maiorId;
+        }
+        if (getchar() == 'x')
+            break;
 
-		printf("%d\n", maiorId);
-	} while (!feof(arq));
+        printf("%d\n", maiorId);
+    } while (!feof(arq));
 
-	return id;
+    return id;
 }
 
 void diaSemana(int dia) {
