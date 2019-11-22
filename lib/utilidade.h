@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <dirent.h>
 
 void corTexto(char *texto, char opcao);
 char *stringNewLine(char *str);

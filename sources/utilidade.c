@@ -63,7 +63,7 @@ char *concat(char *str1, char *str2) {
 	retorno = malloc(tamTotal + 1); */
 
     int tamTotal = strlen(str1) + strlen(str2);
-    char *retorno;  // size of = 2
+    char *retorno;
 	retorno = malloc(tamTotal + 1);
 
     strncpy(retorno, str1, tamTotal);
@@ -79,10 +79,7 @@ int ultimoId(char *caminho) {
     FILE *arq = fopen(concat("data/", caminho), "r");
 
     if (arq == NULL) {
-		if(access(arq, F_OK) == -1) {
-			// Verifica se o arquivo nao existe
-			return 0;
-		}
+		fclose(arq);
         return -1;
     }
 
@@ -96,7 +93,6 @@ int ultimoId(char *caminho) {
     } while (!feof(arq));
 
 	fclose(arq);
-
     return id;
 }
 
@@ -130,11 +126,18 @@ void diaSemana(int dia) {
 
 void criarData() {
 	// Funcao para criar a pasta data se nao houver
+	printf("oi");
 
-	#ifdef _WIN32
-		system("mkdir data");
-	#endif
-	#if defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
-		system("chmod 775 data");
-	#endif
+	DIR *pasta = opendir("data");
+
+	if (!pasta) {
+		#ifdef _WIN32
+			system("mkdir data");
+		#endif
+		#if defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
+			system("mkdir data");
+			system("chmod 775 data");
+		#endif
+	}
+	printf("oi");
 }
