@@ -65,3 +65,79 @@ int salvarInscricao(int id_aluno, int id_aula) {
 
     return 1;
 }
+
+int cancelarInscricao(int id_aluno, int id_aula) {
+	FILE *inscricoes = fopen("data/inscricoes.csv", "r");
+	FILE *inscri = fopen("data/inscricoes~.csv", "w");
+	FILE *relat = fopen("data/r_inscricoescanceladas.csv", "w");
+	FILE *aluno = fopen("data/aluno.csv", "r");
+	FILE *aulas = fopen("data/aulas.csv", "r");
+
+	if (inscricoes == NULL) {
+		corTexto("Erro ao abrir o arquivo: inscricoes.csv\n", 'r');
+		return 0;
+	} if (relat == NULL) {
+		corTexto("Erro ao abrir o arquivo: r_inscricoescanceladas.csv\n", 'r');
+		return 0;
+	} if (aluno == NULL) {
+		corTexto("Erro ao abrir o arquivo: aluno.csv\n", 'r');
+		return 0;
+	} if (aulas == NULL) {
+		corTexto("Erro ao abrir o arquivo: aluno.csv\n", 'r');
+		return 0;
+	}
+
+
+	struct relatorio {
+		char tipo;
+		int dia;
+		char horario[5];
+		char *aluno_nome;
+		char *email_aluno;
+		// telefone;
+	};
+	
+	struct relatorio rel;
+
+	rel.aluno_nome = malloc(100);
+	rel.email_aluno = malloc(100);
+
+	int id_aluno_i, id_aula_i;
+    do {
+		fscanf(inscricoes, "%d,%d", &id_aluno_i, &id_aula_i);
+
+		if(id_aluno_i == id_aluno && id_aula_i == id_aula) {
+			do {
+				fscanf(aluno, "%d,%*s,%s,%s", &id_aluno_i, rel.aluno_nome, rel.email_aluno);
+
+				if (id_aluno_i == id_aluno) {
+					break;
+				}
+			} while (!feof(aluno));
+
+			do {
+				fscanf(aulas, "%d,%c,%d,%s,%*d,%*d,%*s", &id_aula_i, &rel.tipo, &rel.dia, rel.horario);
+
+				if (id_aula_i == id_aula) {
+					break;
+				}
+			} while(!feof(aulas));
+			
+			break;
+		}
+    } while (!feof(inscricoes));
+
+	printf("tipo: %c\n", rel.tipo);
+	printf("horario: %s\n", rel.horario);
+	printf("dia: %d\n", rel.dia);
+	printf("nome: %s\n", rel.aluno_nome);
+	printf("email: %s\n", rel.email_aluno);
+
+	fclose(inscricoes);
+	fclose(inscri);
+	fclose(relat);
+	fclose(aluno);
+	fclose(aulas);
+
+	return 1;
+}

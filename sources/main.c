@@ -15,8 +15,8 @@ int main() {
 
     char input;
 
-    int id_atual_aluno = ultimoId("aluno.csv");
-    int id_atual_professor = ultimoId("professor.csv");
+    int id_atual_aluno = ultimoId("aluno.csv") + 1;
+    int id_atual_professor = ultimoId("professor.csv") + 1;
     do {
         input = menuInicial();
 
@@ -58,16 +58,12 @@ int main() {
         }
 
         else if (input == '0') {
-            getchar();
-            printf("%d\n", ultimoId("aluno.csv"));
-            printf("%d\n", id_atual_aluno);
+			getchar();
+			int id1, id2;
+			printf("Digite id do aluno e da aula: ");
+			scanf("%d %d", &id1, &id2);
 
-            /* 			for(int i = 0; i < 8; i++) { */
-            /* 				if (str[i] == '\0') */
-            /* 					printf("contra-barra zero\n"); */
-            /* 				else */
-            /* 					printf("%c\n", str[i]); */
-            /* 			} */
+			cancelarInscricao(id1, id2);
 
             break;
         }

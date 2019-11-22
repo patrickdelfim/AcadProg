@@ -79,7 +79,6 @@ int ultimoId(char *caminho) {
     FILE *arq = fopen(concat("data/", caminho), "r");
 
     if (arq == NULL) {
-		fclose(arq);
         return -1;
     }
 
