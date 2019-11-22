@@ -8,12 +8,5 @@
 #define clear "clear"                                                                                   // o clear sera o comando clear
 #endif
 
-struct professor {
-    int id_professor;
-    char *cpf;
-    char *nome;
-    char *email;
-};
-
-void cadastroProfessor(struct professor cadastro, int *id_professor);
-int salvarProfessor(struct professor professor);
+void inscreverAluno();
+int salvarInscricao(int id_aluno, int id_aula);

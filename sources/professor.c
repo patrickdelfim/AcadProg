@@ -2,7 +2,7 @@
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
 
-void cadastroProfessor(struct professor cadastro) {
+void cadastroProfessor(struct professor cadastro, int *id_professor) {
     char salvarOpcao;
 
     system(clear);
@@ -93,6 +93,7 @@ void cadastroProfessor(struct professor cadastro) {
         fgets(cadastro.email, 100, stdin);
     }
 
+    cadastro.id_professor = *id_professor;
     cadastro.cpf = stringNewLine(cadastro.cpf);
     cadastro.nome = stringNewLine(cadastro.nome);
     cadastro.email = stringNewLine(cadastro.email);
@@ -158,6 +159,9 @@ void cadastroProfessor(struct professor cadastro) {
             }
         }
     }
+    if (retorno) {
+        *id_professor += 1;
+    }
 }
 
 int salvarProfessor(struct professor professor) {
@@ -169,7 +173,7 @@ int salvarProfessor(struct professor professor) {
         return 0;
     }
 
-    fprintf(fptr, "%s,%s,%s\n", professor.cpf, professor.nome, professor.email);
+    fprintf(fptr, "%d,%s,%s,%s\n", professor.id_professor, professor.cpf, professor.nome, professor.email);
 
     fclose(fptr);
 

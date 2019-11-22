@@ -276,7 +276,7 @@ int salvarAula(struct aula aula) {
         return 0;
     }
 
-    fprintf(fptr, "%c,%d,%s,%d,%d,%d,%s\n", aula.tipo, aula.dia, aula.horario, aula.id_prof,
+    fprintf(fptr, "%d,%c,%d,%s,%d,%d,%s\n", aula.id_prof, aula.tipo, aula.dia, aula.horario,
             aula.minimo, aula.maximo, aula.faixa_etaria);
 
     fclose(fptr);
@@ -286,14 +286,14 @@ int salvarAula(struct aula aula) {
 
 // converter char para nome de categoria de aula
 
-void charTipo(char tipo){
-    if(tipo == 'A'){
+void charTipo(char tipo) {
+    if (tipo == 'A') {
         printf("Tipo da aula : Artes Maciais");
-    }else if(tipo == 'B'){
+    } else if (tipo == 'B') {
         printf("Tipo da aula : Boxe");
-    }else if(tipo == 'C'){
+    } else if (tipo == 'C') {
         printf("Tipo da aula : CrossFit");
-    }else if(tipo == 'D'){
-        printf("Tipo da aula : Danca");  
+    } else if (tipo == 'D') {
+        printf("Tipo da aula : Danca");
     }
 }
