@@ -139,5 +139,7 @@ int cancelarInscricao(int id_aluno, int id_aula) {
 	fclose(aluno);
 	fclose(aulas);
 
+	remove("data/inscricoes~.csv");
+
 	return 1;
 }

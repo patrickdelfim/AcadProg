@@ -17,3 +17,5 @@ struct aluno {
 
 void cadastroAluno(struct aluno cadastro, int *id_aluno);
 int salvarAluno(struct aluno aluno);
+struct aluno obterAlunoPorId(int id);
+
