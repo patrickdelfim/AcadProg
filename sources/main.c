@@ -69,9 +69,10 @@ int main() {
 
 			/* getchar(); */
 
-			struct aula a = obterAulaPorId(0);
+			struct professor a = obterProfessorPorId(0);
+			printf("%s\n", a.nome);
 
-			printf(a.id_aula != -1 ? "oi\n" : "tchau\n");
+			/* printf(a.id_aula != -1 ? "oi\n" : "tchau\n"); */
 
 			/* printf("Id: %d\n", a.id_aluno); */
 			/* printf("CPF: %s\n", a.cpf); */

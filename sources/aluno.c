@@ -180,7 +180,7 @@ int salvarAluno(struct aluno aluno) {
 
 struct aluno obterAlunoPorId(int id) {
 	int ehValido = idValido("aluno.csv", id);
-	if (id == 1) {
+	if (ehValido == 1) {
 		FILE *aluno_arq = fopen("data/aluno.csv", "r");
 
 		struct aluno aluno;
@@ -211,6 +211,10 @@ struct aluno obterAlunoPorId(int id) {
 		return aluno;
 	} else {
 		struct aluno aluno;
+
+		aluno.cpf = malloc(12);
+		aluno.nome = malloc(100);
+		aluno.email = malloc(100);
 
 		aluno.id_aluno = -1;
 		aluno.cpf = NULL;
