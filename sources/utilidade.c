@@ -85,7 +85,7 @@ int ultimoId(char *caminho) {
     int id = 0, maiorId = 0;
 
     do {
-        fscanf(arq, "%d,%*s,%*s,%*s\n", &maiorId);
+        fscanf(arq, "%d,%*[^\n]\n", &maiorId);
         if (maiorId > id) {
             id = maiorId;
         }
@@ -125,7 +125,6 @@ void diaSemana(int dia) {
 
 void criarData() {
 	// Funcao para criar a pasta data se nao houver
-	printf("oi");
 
 	DIR *pasta = opendir("data");
 
@@ -138,5 +137,4 @@ void criarData() {
 			system("chmod 775 data");
 		#endif
 	}
-	printf("oi");
 }

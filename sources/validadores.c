@@ -157,3 +157,29 @@ int validarHorario(char *horario) {
 
     return 0;
 }
+
+int idValido(char *caminho, int id) {
+    FILE *arq = fopen(concat("data/", caminho), "r");
+
+    if (arq == NULL) {
+        return -1;
+    }
+
+    int valido = 0, id_loop;
+
+    do {
+        fscanf(arq, "%d,%*[^\n]\n", &id_loop);
+
+		valido = 0;
+
+        if (id == id_loop) {
+			valido = 1;
+			break;
+        }
+    } while (!feof(arq));
+
+	fclose(arq);
+
+    return valido;
+}
+
