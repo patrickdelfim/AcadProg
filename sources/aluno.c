@@ -179,23 +179,44 @@ int salvarAluno(struct aluno aluno) {
 }
 
 struct aluno obterAlunoPorId(int id) {
-	printf("oi1");
-	FILE *aluno_arq = fopen("data/aluno.csv", "r");
+	int ehValido = idValido("aluno.csv", id);
+	if (id == 1) {
+		FILE *aluno_arq = fopen("data/aluno.csv", "r");
 
-	struct aluno aluno;
-	aluno.cpf = malloc(12);
-	aluno.nome = malloc(100);
-	aluno.email = malloc(100);
+		struct aluno aluno;
+		aluno.cpf = malloc(12);
+		aluno.nome = malloc(100);
+		aluno.email = malloc(100);
 
-	do {
-		fscanf(aluno_arq, "%d,%s,%s,%s", &aluno.id_aluno, aluno.cpf, aluno.nome, aluno.email);
-		if (aluno.id_aluno == id) {
-			printf("oi");
-			break;
-		}
-	} while(!feof(aluno_arq));
+		do {
+			fscanf(aluno_arq, "%d,%[^,],%[^,],%[^\n]\n", &aluno.id_aluno, aluno.cpf, aluno.nome, aluno.email);
 
-	fclose(aluno_arq);
+			if (aluno.id_aluno == id)
+				break;
+			else
+				if (feof(aluno_arq)) {
+					aluno.id_aluno = -1;
+					aluno.cpf = NULL;
+					aluno.nome = NULL;
+					aluno.email = NULL;
 
-	return aluno;
+					return aluno;
+				}
+
+		} while(!feof(aluno_arq));
+
+
+		fclose(aluno_arq);
+
+		return aluno;
+	} else {
+		struct aluno aluno;
+
+		aluno.id_aluno = -1;
+		aluno.cpf = NULL;
+		aluno.nome = NULL;
+		aluno.email = NULL;
+
+		return aluno;
+	}
 }
