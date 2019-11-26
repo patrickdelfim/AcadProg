@@ -14,6 +14,7 @@
 
 struct aula {
     int id_aula;
+    int id_aluno;
     int id_prof;
     int minimo;
     int maximo;
@@ -23,7 +24,11 @@ struct aula {
     char *faixa_etaria;
 };
 
-void cadastroAula(struct aula cadastro);
+void cadastroAula(struct aula cadastro, int *id_aula);
+
 int salvarAula(struct aula aula);
-void charTipo(char tipo);
+
+char *charTipoAula(char tipo);
+
+struct aula obterAulaPorId(int id);
 

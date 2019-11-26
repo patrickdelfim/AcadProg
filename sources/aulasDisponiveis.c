@@ -2,7 +2,7 @@
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
 
-void cadastroAula(struct aula cadastro) {
+void cadastroAula(struct aula cadastro, int *id_aula) {
     char salvarOpcao;
 
     system(clear);
@@ -38,8 +38,8 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    charTipo(cadastro.tipo);
-    /* corTexto(cadastro.tipo, 'g'); */
+	printf("Tipo de aula: ");
+	corTexto(charTipoAula(cadastro.tipo), 'g');
     printf("\n");
     //getchar();
 
@@ -75,7 +75,8 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    charTipo(cadastro.tipo);
+	printf("Tipo de aula: ");
+	corTexto(charTipoAula(cadastro.tipo), 'g');
     printf("\n");
 
     printf("Dia da semana: ");
@@ -101,33 +102,64 @@ void cadastroAula(struct aula cadastro) {
 
     /* Cadastro id professor */
 
-    system(clear);
+	do {
+		system(clear);
 
-    printf("Por favor insira as informacoes da aula:\n\n");
+		printf("Por favor insira as informacoes da aula:\n\n");
 
-    charTipo(cadastro.tipo);
-    printf("\n");
+		printf("Tipo de aula: ");
+		corTexto(charTipoAula(cadastro.tipo), 'g');
+		printf("\n");
 
-    printf("Dia da semana: ");
-    diaSemana(cadastro.dia);
-    printf("\n");
+		printf("Dia da semana: ");
+		diaSemana(cadastro.dia);
+		printf("\n");
 
-    printf("Horario da aula: ");
-    corTexto(cadastro.horario, 'g');
-    printf("\n");
+		printf("Horario da aula: ");
+		corTexto(cadastro.horario, 'g');
+		printf("\n");
 
-    /*=========================================
-       Printar na tela a lista de professores 
-                antes do imput
-    ===========================================*/
+		/*=========================================
+		   Printar na tela a lista de professores 
+					antes do imput
+		===========================================*/
 
-    printf("Cadastro ID Professor: ");
-    scanf("%d", &cadastro.id_prof);
+		printf("Cadastro ID Professor: ");
+		scanf("%d", &cadastro.id_prof);
 
-    /* Cadastro min turma */
-    cadastro.minimo = 1000;
-    cadastro.maximo = 0;
-    int status = 0;
+	} while (idValido("professor.csv", cadastro.id_prof) != 1);
+
+	do {
+		// Cadastro id aluno
+
+		system(clear);
+
+		printf("Por favor insira as informacoes da aula:\n\n");
+
+		printf("Tipo de aula: ");
+		corTexto(charTipoAula(cadastro.tipo), 'g');
+		printf("\n");
+
+		printf("Dia da semana: ");
+		diaSemana(cadastro.dia);
+		printf("\n");
+
+		printf("Horario da aula: ");
+		corTexto(cadastro.horario, 'g');
+		printf("\n");
+
+        printf("ID Professor: %d", cadastro.id_prof);
+        printf("\n");
+
+		printf("Cadastro ID aluno: ");
+		scanf("%d", &cadastro.id_aluno);
+
+	} while (idValido("aluno.csv", cadastro.id_aluno) != 1);
+
+	/* Cadastro min turma */
+	cadastro.minimo = 1000;
+	cadastro.maximo = 0;
+	int status = 0;
 
     while (cadastro.minimo > cadastro.maximo) {
         system(clear);
@@ -138,7 +170,8 @@ void cadastroAula(struct aula cadastro) {
 
         printf("Por favor insira as informacoes da aula:\n\n");
 
-        charTipo(cadastro.tipo);
+		printf("Tipo de aula: ");
+		corTexto(charTipoAula(cadastro.tipo), 'g');
         printf("\n");
 
         printf("Dia da semana: ");
@@ -150,6 +183,9 @@ void cadastroAula(struct aula cadastro) {
         printf("\n");
 
         printf("ID Professor: %d", cadastro.id_prof);
+        printf("\n");
+
+        printf("ID Aluno: %d", cadastro.id_aluno);
         printf("\n");
 
         printf("Minimo de pessoas na aula: ");
@@ -165,7 +201,8 @@ void cadastroAula(struct aula cadastro) {
 
         printf("Por favor insira as informacoes da aula:\n\n");
 
-        charTipo(cadastro.tipo);
+		printf("Tipo de aula: ");
+		corTexto(charTipoAula(cadastro.tipo), 'g');
         printf("\n");
 
         printf("Dia da semana: ");
@@ -177,6 +214,9 @@ void cadastroAula(struct aula cadastro) {
         printf("\n");
 
         printf("ID Professor: %d", cadastro.id_prof);
+        printf("\n");
+
+        printf("ID Aluno: %d", cadastro.id_aluno);
         printf("\n");
 
         printf("Minimo de pessoas na aula: %d", cadastro.minimo);
@@ -200,7 +240,8 @@ void cadastroAula(struct aula cadastro) {
 
     printf("Por favor insira as informacoes da aula:\n\n");
 
-    charTipo(cadastro.tipo);
+	printf("Tipo de aula: ");
+	corTexto(charTipoAula(cadastro.tipo), 'g');
     printf("\n");
 
     printf("Dia da semana: ");
@@ -213,6 +254,9 @@ void cadastroAula(struct aula cadastro) {
 
     printf("ID Professor: %d", cadastro.id_prof);
     printf("\n");
+
+	printf("ID Aluno: %d", cadastro.id_aluno);
+	printf("\n");
 
     printf("Minimo de pessoas na aula: %d", cadastro.minimo);
     printf("\n");
@@ -226,58 +270,86 @@ void cadastroAula(struct aula cadastro) {
 
     /* validacao e salvamento */
 
-    system(clear);
+	int retorno;
 
-    printf("Por favor insira as informacoes da aula:\n\n");
+	do {
+		system(clear);
 
-    charTipo(cadastro.tipo);
-    printf("\n");
+		printf("Por favor insira as informacoes da aula:\n\n");
 
-    printf("Dia da semana: ");
-    diaSemana(cadastro.dia);
-    printf("\n");
+		printf("Tipo de aula: ");
+		corTexto(charTipoAula(cadastro.tipo), 'g');
+		printf("\n");
 
-    printf("Horario da aula: ");
-    corTexto(cadastro.horario, 'g');
-    printf("\n");
+		printf("Dia da semana: ");
+		diaSemana(cadastro.dia);
+		printf("\n");
 
-    printf("ID Professor: %d", cadastro.id_prof);
-    printf("\n");
+		printf("Horario da aula: ");
+		corTexto(cadastro.horario, 'g');
+		printf("\n");
 
-    printf("Minimo de pessoas na aula: %d", cadastro.minimo);
-    printf("\n");
+		printf("ID Professor: %d", cadastro.id_prof);
+		printf("\n");
 
-    printf("Maximo de pessoas na aula: %d", cadastro.maximo);
-    printf("\n");
+		printf("ID Aluno: %d", cadastro.id_aluno);
+		printf("\n");
 
-    printf("Faixa etaria da aula: ");
-    corTexto(cadastro.faixa_etaria, 'g');
-    printf("\n");
+		printf("Minimo de pessoas na aula: %d", cadastro.minimo);
+		printf("\n");
 
-    cadastro.horario = stringNewLine(cadastro.horario);
-    cadastro.faixa_etaria = stringNewLine(cadastro.faixa_etaria);
+		printf("Maximo de pessoas na aula: %d", cadastro.maximo);
+		printf("\n");
 
-    printf("Deseja salvar essa aula cadastrada?\n");
-    corTexto("S - Sim\t", 'g');
-    corTexto("N - Nao\n", 'r');
-    printf(">>> ");
-    scanf(" %c", &salvarOpcao);
+		printf("Faixa etaria da aula: ");
+		corTexto(cadastro.faixa_etaria, 'g');
+		printf("\n");
 
-    if (salvarOpcao == 's' || salvarOpcao == 'S') {
-        salvarAula(cadastro);
-    }
+		cadastro.horario = stringNewLine(cadastro.horario);
+		cadastro.faixa_etaria = stringNewLine(cadastro.faixa_etaria);
+
+		printf("Deseja salvar essa aula cadastrada?\n");
+		corTexto("S - Sim\t", 'g');
+		corTexto("N - Nao\n", 'r');
+		printf(">>> ");
+		scanf(" %c", &salvarOpcao);
+		salvarOpcao = toupper(salvarOpcao);
+
+		if (salvarOpcao == 'S') {
+			cadastro.id_aula = *id_aula;
+			retorno = salvarAula(cadastro);
+		} else if (salvarOpcao == 'N') {
+			break;
+		}
+	} while (salvarOpcao != 'S' || salvarOpcao == 'N');
+
+	if (retorno) {
+		*id_aula += 1;
+	} else {
+        corTexto("Erro ao abrir o arquivo\n", 'r');
+	}
 }
 
 int salvarAula(struct aula aula) {
     FILE *fptr = fopen("./data/aulas.csv", "a");
 
     if (fptr == NULL) {
-        corTexto("Erro ao abrir o arquivo\n", 'r');
         return 0;
     }
 
-    fprintf(fptr, "%d,%c,%d,%s,%d,%d,%s\n", aula.id_prof, aula.tipo, aula.dia, aula.horario,
-            aula.minimo, aula.maximo, aula.faixa_etaria);
+    fprintf(
+			fptr,
+			"%d,%d,%d,%d,%d,%d,%c,%s,%s\n",
+			aula.id_aula,
+			aula.id_aluno,
+			aula.id_prof,
+			aula.minimo,
+			aula.maximo,
+			aula.dia,
+			aula.tipo,
+			aula.horario,
+			aula.faixa_etaria
+			);
 
     fclose(fptr);
 
@@ -286,14 +358,80 @@ int salvarAula(struct aula aula) {
 
 // converter char para nome de categoria de aula
 
-void charTipo(char tipo) {
-    if (tipo == 'A') {
-        printf("Tipo da aula : Artes Maciais");
-    } else if (tipo == 'B') {
-        printf("Tipo da aula : Boxe");
-    } else if (tipo == 'C') {
-        printf("Tipo da aula : CrossFit");
-    } else if (tipo == 'D') {
-        printf("Tipo da aula : Danca");
-    }
+char *charTipoAula(char tipo) {
+    if (tipo == 'A')
+        return "Artes Maciais";
+    else if (tipo == 'B')
+        return "Boxe";
+    else if (tipo == 'C')
+        return "CrossFit";
+    else if (tipo == 'D')
+        return "Danca";
+}
+
+struct aula obterAulaPorId(int id) {
+	int ehValido = idValido("aulas.csv", id);
+
+	if (ehValido == 1) {
+		FILE *aulas_arq = fopen("data/aulas.csv", "r");
+
+		struct aula aula;
+		aula.horario = malloc(100);
+		aula.faixa_etaria = malloc(100);
+
+		do {
+			fscanf(
+				aulas_arq, // Ponteiro pro aquivo
+
+				"%d,%d,%d,%d,%d,%d,%c,%[^,],%[^\n]\n", // Formatacao do arquivo
+
+				&aula.id_aula, // Campos organizados
+				&aula.id_aluno,
+				&aula.id_prof,
+				&aula.minimo,
+				&aula.maximo,
+				&aula.dia,
+				&aula.tipo,
+				aula.horario,
+				aula.faixa_etaria
+			);
+
+			if (aula.id_aula == id)
+				break;
+			else
+				if (feof(aulas_arq)) {
+					aula.id_aula = -1;
+					aula.id_aluno = -1;
+					aula.id_prof = -1;
+					aula.minimo = -1;
+					aula.maximo = -1;
+					aula.dia = -1;
+					aula.tipo = '0';
+					aula.horario = NULL;
+					aula.faixa_etaria = NULL;
+
+					return aula;
+				}
+
+		} while(!feof(aulas_arq));
+
+
+		fclose(aulas_arq);
+
+		return aula;
+	} else {
+		struct aula aula;
+
+		aula.id_aula = -1;
+		aula.id_aluno = -1;
+		aula.id_prof = -1;
+		aula.minimo = -1;
+		aula.maximo = -1;
+		aula.dia = -1;
+		aula.tipo = '0';
+		aula.horario = NULL;
+		aula.faixa_etaria = NULL;
+
+		return aula;
+	}
 }

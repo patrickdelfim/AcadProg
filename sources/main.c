@@ -15,6 +15,7 @@ int main() {
 
     char input;
 
+    int id_atual_aula = ultimoId("aulas.csv") + 1;
     int id_atual_aluno = ultimoId("aluno.csv") + 1;
     int id_atual_professor = ultimoId("professor.csv") + 1;
     do {
@@ -56,7 +57,7 @@ int main() {
             aulaCadastro.horario = malloc(sizeof(char) * 6);
             aulaCadastro.faixa_etaria = malloc(sizeof(char) * 6);
 
-            cadastroAula(aulaCadastro);
+            cadastroAula(aulaCadastro, &id_atual_aula);
 
         } else if (input == '4') {
             inscreverAluno();
@@ -66,14 +67,16 @@ int main() {
         else if (input == '0') {
 			// teste
 
-			getchar();
+			/* getchar(); */
 
-			struct aluno a = obterAlunoPorId(0);
+			struct aula a = obterAulaPorId(0);
 
-			printf("Id: %d\n", a.id_aluno);
-			printf("CPF: %s\n", a.cpf);
-			printf("Nome: %s\n", a.nome);
-			printf("Email: %s\n", a.email);
+			printf(a.id_aula != -1 ? "oi\n" : "tchau\n");
+
+			/* printf("Id: %d\n", a.id_aluno); */
+			/* printf("CPF: %s\n", a.cpf); */
+			/* printf("Nome: %s\n", a.nome); */
+			/* printf("Email: %s\n", a.email); */
 
 			/* printf("Digite id do aluno e da aula: "); */
 			/* scanf("%d %d", &id1, &id2); */
