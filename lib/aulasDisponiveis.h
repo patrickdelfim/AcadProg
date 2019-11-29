@@ -1,6 +1,6 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
@@ -14,7 +14,6 @@
 
 struct aula {
     int id_aula;
-    int id_aluno;
     int id_prof;
     int minimo;
     int maximo;
@@ -31,4 +30,3 @@ int salvarAula(struct aula aula);
 char *charTipoAula(char tipo);
 
 struct aula obterAulaPorId(int id);
-

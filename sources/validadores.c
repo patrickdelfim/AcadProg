@@ -113,7 +113,7 @@ int validarEMAIL(char *email) {
 int validarHorario(char *horario) {
     int tam = strlen(horario);
 
-        // tamanho de tam dando 40 ????
+    // tamanho de tam dando 40 ????
 
     int num[4];
     int i = 0;
@@ -170,16 +170,51 @@ int idValido(char *caminho, int id) {
     do {
         fscanf(arq, "%d,%*[^\n]\n", &id_loop);
 
-		valido = 0;
+        valido = 0;
 
         if (id == id_loop) {
-			valido = 1;
-			break;
+            valido = 1;
+            break;
         }
     } while (!feof(arq));
 
-	fclose(arq);
+    fclose(arq);
 
     return valido;
 }
 
+/* COLOCAR ESSA FUNCAO EM UTILITARIO \/\/\/ */
+
+void printId(char *caminho) {
+    FILE *arq = fopen(concat("data/", caminho), "r");
+
+    if (arq == NULL) {
+        exit(1);
+    }
+    // deveria fazer isso com memoria normal ou dinamica?
+    char nome[20];
+    char teste[10];
+    int id_loop, flip = 0;
+
+    while (!feof(arq)) {
+        fscanf(arq, "%d,%*s,%s,%*s\n", &id_loop, nome);
+
+        /*===========================================
+            -=-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=--=-
+            NOME DO PROFESSOR NAO ESTA IMPRIMINDO (problema na leitura. por algum motivo nao esta 
+            lendo apenas os valores que preciso e sim o arquivo todo.)
+            -=-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=--=-
+        ===============================================*/
+
+        printf("id: %d ->  ", id_loop);
+        printf("%s ", nome);
+        if (flip == 1) {
+            flip = 0;
+            printf("\n");
+        } else {
+            flip = 1;
+        }
+    }
+
+    fclose(arq);
+}

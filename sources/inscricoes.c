@@ -6,7 +6,13 @@ void inscreverAluno() {
     int id, id_aluno, id_aula;
     int alunoValido = 0, aulaValida = 0;
 
-    while (alunoValido == 0) {
+    while (alunoValido != 1) {
+        system(clear);
+
+        if (alunoValido == 2) {
+            corTexto("Id do aluno Invalido \n", 'r');
+        }
+
         printf("digite o Id do aluno: ");
         scanf("%d", &id_aluno);
 
@@ -19,14 +25,18 @@ void inscreverAluno() {
             }
         } while (!feof(arq));
         fclose(arq);
-
-        system(clear);
-        if (alunoValido == 0) {
-            corTexto("Id do aluno Invalido \n", 'r');
+        if (alunoValido != 1) {
+            alunoValido = 2;
         }
     }
 
-    while (aulaValida == 0) {
+    while (aulaValida != 1) {
+        system(clear);
+
+        if (aulaValida == 2) {
+            corTexto("Id da aula Invalida \n", 'r');
+        }
+
         printf("digite o Id da aula: ");
         scanf("%d", &id_aula);
 
@@ -40,9 +50,8 @@ void inscreverAluno() {
         } while (!feof(fptr));
         fclose(fptr);
 
-        system(clear);
-        if (aulaValida == 0) {
-            corTexto("Id da aula Invalida \n", 'r');
+        if (aulaValida != 1) {
+            aulaValida = 2;
         }
     }
 
@@ -67,79 +76,81 @@ int salvarInscricao(int id_aluno, int id_aula) {
 }
 
 int cancelarInscricao(int id_aluno, int id_aula) {
-	FILE *inscricoes = fopen("data/inscricoes.csv", "r");
-	FILE *inscri = fopen("data/inscricoes~.csv", "w");
-	FILE *relat = fopen("data/r_inscricoescanceladas.csv", "w");
-	FILE *aluno = fopen("data/aluno.csv", "r");
-	FILE *aulas = fopen("data/aulas.csv", "r");
+    FILE *inscricoes = fopen("data/inscricoes.csv", "r");
+    FILE *inscri = fopen("data/inscricoes~.csv", "w");
+    FILE *relat = fopen("data/r_inscricoescanceladas.csv", "w");
+    FILE *aluno = fopen("data/aluno.csv", "r");
+    FILE *aulas = fopen("data/aulas.csv", "r");
 
-	if (inscricoes == NULL) {
-		corTexto("Erro ao abrir o arquivo: inscricoes.csv\n", 'r');
-		return 0;
-	} if (relat == NULL) {
-		corTexto("Erro ao abrir o arquivo: r_inscricoescanceladas.csv\n", 'r');
-		return 0;
-	} if (aluno == NULL) {
-		corTexto("Erro ao abrir o arquivo: aluno.csv\n", 'r');
-		return 0;
-	} if (aulas == NULL) {
-		corTexto("Erro ao abrir o arquivo: aluno.csv\n", 'r');
-		return 0;
-	}
+    if (inscricoes == NULL) {
+        corTexto("Erro ao abrir o arquivo: inscricoes.csv\n", 'r');
+        return 0;
+    }
+    if (relat == NULL) {
+        corTexto("Erro ao abrir o arquivo: r_inscricoescanceladas.csv\n", 'r');
+        return 0;
+    }
+    if (aluno == NULL) {
+        corTexto("Erro ao abrir o arquivo: aluno.csv\n", 'r');
+        return 0;
+    }
+    if (aulas == NULL) {
+        corTexto("Erro ao abrir o arquivo: aluno.csv\n", 'r');
+        return 0;
+    }
 
+    struct relatorio {
+        char tipo;
+        int dia;
+        char horario[5];
+        char *aluno_nome;
+        char *email_aluno;
+        // telefone;
+    };
 
-	struct relatorio {
-		char tipo;
-		int dia;
-		char horario[5];
-		char *aluno_nome;
-		char *email_aluno;
-		// telefone;
-	};
-	
-	struct relatorio rel;
+    struct relatorio rel;
 
-	rel.aluno_nome = malloc(100);
-	rel.email_aluno = malloc(100);
+    rel.aluno_nome = malloc(100);
+    rel.email_aluno = malloc(100);
 
-	int id_aluno_i, id_aula_i;
+    int id_aluno_i, id_aula_i;
     do {
-		fscanf(inscricoes, "%d,%d", &id_aluno_i, &id_aula_i);
+        fscanf(inscricoes, "%d,%d", &id_aluno_i, &id_aula_i);
 
-		if(id_aluno_i == id_aluno && id_aula_i == id_aula) {
-			do {
-				fscanf(aluno, "%d,%*s,%s,%s", &id_aluno_i, rel.aluno_nome, rel.email_aluno);
+        if (id_aluno_i == id_aluno && id_aula_i == id_aula) {
+            do {
+                fscanf(aluno, "%d,%*s,%s,%s", &id_aluno_i, rel.aluno_nome, rel.email_aluno);
 
-				if (id_aluno_i == id_aluno) {
-					break;
-				}
-			} while (!feof(aluno));
+                if (id_aluno_i == id_aluno) {
+                    break;
+                }
+            } while (!feof(aluno));
 
-			do {
-				fscanf(aulas, "%d,%c,%d,%s,%*d,%*d,%*s", &id_aula_i, &rel.tipo, &rel.dia, rel.horario);
+            do {
+                fscanf(aulas, "%d,%c,%d,%s,%*d,%*d,%*s", &id_aula_i, &rel.tipo, &rel.dia, rel.horario);
 
-				if (id_aula_i == id_aula) {
-					break;
-				}
-			} while(!feof(aulas));
-			
-			break;
-		}
+                if (id_aula_i == id_aula) {
+                    break;
+                }
+            } while (!feof(aulas));
+
+            break;
+        }
     } while (!feof(inscricoes));
 
-	printf("tipo: %c\n", rel.tipo);
-	printf("horario: %s\n", rel.horario);
-	printf("dia: %d\n", rel.dia);
-	printf("nome: %s\n", rel.aluno_nome);
-	printf("email: %s\n", rel.email_aluno);
+    printf("tipo: %c\n", rel.tipo);
+    printf("horario: %s\n", rel.horario);
+    printf("dia: %d\n", rel.dia);
+    printf("nome: %s\n", rel.aluno_nome);
+    printf("email: %s\n", rel.email_aluno);
 
-	fclose(inscricoes);
-	fclose(inscri);
-	fclose(relat);
-	fclose(aluno);
-	fclose(aulas);
+    fclose(inscricoes);
+    fclose(inscri);
+    fclose(relat);
+    fclose(aluno);
+    fclose(aulas);
 
-	remove("data/inscricoes~.csv");
+    remove("data/inscricoes~.csv");
 
-	return 1;
+    return 1;
 }

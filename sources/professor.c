@@ -181,48 +181,46 @@ int salvarProfessor(struct professor professor) {
 }
 
 struct professor obterProfessorPorId(int id) {
-	int ehValido = idValido("professor.csv", id);
-	if (ehValido == 1) {
-		FILE *professor_arq = fopen("data/professor.csv", "r");
+    int ehValido = idValido("professor.csv", id);
+    if (ehValido == 1) {
+        FILE *professor_arq = fopen("data/professor.csv", "r");
 
-		struct professor professor;
-		professor.cpf = malloc(12);
-		professor.nome = malloc(100);
-		professor.email = malloc(100);
+        struct professor professor;
+        professor.cpf = malloc(12);
+        professor.nome = malloc(100);
+        professor.email = malloc(100);
 
-		do {
-			fscanf(professor_arq, "%d,%[^,],%[^,],%[^\n]\n", &professor.id_professor, professor.cpf, professor.nome, professor.email);
+        do {
+            fscanf(professor_arq, "%d,%[^,],%[^,],%[^\n]\n", &professor.id_professor, professor.cpf, professor.nome, professor.email);
 
-			if (professor.id_professor == id)
-				break;
-			else
-				if (feof(professor_arq)) {
-					professor.id_professor = -1;
-					professor.cpf = NULL;
-					professor.nome = NULL;
-					professor.email = NULL;
+            if (professor.id_professor == id)
+                break;
+            else if (feof(professor_arq)) {
+                professor.id_professor = -1;
+                professor.cpf = NULL;
+                professor.nome = NULL;
+                professor.email = NULL;
 
-					return professor;
-				}
+                return professor;
+            }
 
-		} while(!feof(professor_arq));
+        } while (!feof(professor_arq));
 
+        fclose(professor_arq);
 
-		fclose(professor_arq);
+        return professor;
+    } else {
+        struct professor professor;
 
-		return professor;
-	} else {
-		struct professor professor;
+        professor.cpf = malloc(12);
+        professor.nome = malloc(100);
+        professor.email = malloc(100);
 
-		professor.cpf = malloc(12);
-		professor.nome = malloc(100);
-		professor.email = malloc(100);
+        professor.id_professor = -1;
+        professor.cpf = NULL;
+        professor.nome = NULL;
+        professor.email = NULL;
 
-		professor.id_professor = -1;
-		professor.cpf = NULL;
-		professor.nome = NULL;
-		professor.email = NULL;
-
-		return professor;
-	}
+        return professor;
+    }
 }

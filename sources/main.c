@@ -22,7 +22,7 @@ int main() {
         input = menuInicial();
 
         if (input == '1') {
-			// cadastro aluno
+            // cadastro aluno
 
             struct aluno alunoCadastrado;
             alunoCadastrado.cpf = malloc(sizeof(char) * 12);
@@ -40,7 +40,7 @@ int main() {
             // printf("%s\n", alunoCadastrado.nome);
             // printf("%d\n", strlen(alunoCadastrado.nome)); // Adicionar um realloc no nome do aluno
         } else if (input == '2') {
-			// cadastro professor
+            // cadastro professor
 
             struct professor profCadastrado;
             profCadastrado.cpf = malloc(sizeof(char) * 12);
@@ -50,7 +50,7 @@ int main() {
             cadastroProfessor(profCadastrado, &id_atual_professor);
 
         } else if (input == '3') {
-			// cadastro aula
+            // cadastro aula
 
             struct aula aulaCadastro;
 
@@ -65,24 +65,24 @@ int main() {
         }
 
         else if (input == '0') {
-			// teste
+            // teste
 
-			/* getchar(); */
+            /* getchar(); */
 
-			struct professor a = obterProfessorPorId(0);
-			printf("%s\n", a.nome);
+            struct professor a = obterProfessorPorId(0);
+            printf("%s\n", a.nome);
 
-			/* printf(a.id_aula != -1 ? "oi\n" : "tchau\n"); */
+            /* printf(a.id_aula != -1 ? "oi\n" : "tchau\n"); */
 
-			/* printf("Id: %d\n", a.id_aluno); */
-			/* printf("CPF: %s\n", a.cpf); */
-			/* printf("Nome: %s\n", a.nome); */
-			/* printf("Email: %s\n", a.email); */
+            /* printf("Id: %d\n", a.id_aluno); */
+            /* printf("CPF: %s\n", a.cpf); */
+            /* printf("Nome: %s\n", a.nome); */
+            /* printf("Email: %s\n", a.email); */
 
-			/* printf("Digite id do aluno e da aula: "); */
-			/* scanf("%d %d", &id1, &id2); */
+            /* printf("Digite id do aluno e da aula: "); */
+            /* scanf("%d %d", &id1, &id2); */
 
-			/* cancelarInscricao(id1, id2); */
+            /* cancelarInscricao(id1, id2); */
 
             break;
         }

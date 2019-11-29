@@ -20,4 +20,3 @@ void cadastroProfessor(struct professor cadastro, int *id_professor);
 int salvarProfessor(struct professor professor);
 
 struct professor obterProfessorPorId(int id);
-

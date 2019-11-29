@@ -11,3 +11,4 @@ int validarHorario(char *horario);
 
 int idValido(char *caminho, int id);
 
+void printId(char *caminho);
