@@ -11,7 +11,7 @@ void inscreverAluno() {
     scanf("%d", &id_aula);
 
     alunoValido = idValido("aluno.csv", id_aluno);
-    aulaValida = idValido("aula.csv", id_aula);
+    aulaValida = idValido("aulas.csv", id_aula);
 
     if (alunoValido == 1 && aulaValida == 1) {
         salvarInscricao(id_aluno, id_aula);
@@ -39,7 +39,7 @@ int cancelarInscricao(int id_aluno, int id_aula) {
 
     int relatorio = relatorioInscricaoCancelada(id_aluno, id_aula);
 
-    if (relatorio != 0)
+    if (relatorio == 0)
         return 0;
 
     if (insc == NULL)
@@ -50,10 +50,10 @@ int cancelarInscricao(int id_aluno, int id_aula) {
     do {
         fscanf(insc, "%d,%d\n", &id_aluno_l, &id_aula_l);
 
+        printf("Lendo aluno(%d) e aula(%d)\n", id_aluno_l, id_aula_l);
+
         if (id_aula_l != id_aula || id_aluno_l != id_aluno)
             fprintf(insc_aux, "%d,%d\n", id_aluno_l, id_aula_l);
-        else if (id_aula_l == id_aula && id_aluno_l == id_aluno)
-            printf("exclui um ai\n");
 
     } while (!feof(insc));
 
@@ -81,8 +81,6 @@ int cancelarTodasInscricao(int id_aula) {
 
         if (id_aula_l != id_aula)
             fprintf(insc_aux, "%d,%d\n", id_aluno_l, id_aula_l);
-        else if (id_aula_l == id_aula)
-            printf("exclui um ai\n");
 
     } while (!feof(insc));
 
@@ -99,7 +97,6 @@ int cancelarTodasInscricao(int id_aula) {
 int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
     FILE *relat = fopen("data/r_inscricoescanceladas.csv", "a");
 
-    printf("oi\n");
     if (relat == NULL)
         return 0;
 
@@ -111,8 +108,10 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
 
     aluno = obterAlunoPorId(id_aluno);
 
-    if (aluno.id_aluno == -1)
+    if (aluno.id_aluno == -1) {
+        printf("Id aluno invalido\n");
         return 0;
+    }
 
     struct aula aula;
 
@@ -120,8 +119,10 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
 
     aula = obterAulaPorId(id_aula);
 
-    if (aula.id_aula == -1)
+    if (aula.id_aula == -1) {
+        printf  ("Id aula invalida\n");
         return 0;
+    }
 
     struct relatorio rel;
 
@@ -138,7 +139,7 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
     fprintf(
         relat,
 
-        "%c,%d,%s,%s,%s",
+        "%c,%d,%s,%s,%s\n",
 
         rel.tipo,
         rel.dia,
@@ -157,3 +158,48 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
 
     return 1;
 }
+
+int ordenarRelatorio() {
+    FILE *relat = fopen("data/r_inscricoescanceladas.csv", "r");
+    FILE *aux = fopen("data/aux", "w");
+
+    if (relat == NULL)
+        return 0;
+    if (aux == NULL)
+        return 0;
+    
+}
+
+struct relatorio *listarRelatorios() {
+    FILE *relat = fopen("data/r_inscricoescanceladas.csv", "r");
+
+    if (relat == NULL)
+        return NULL;
+
+    struct relatorio *relat_lista;
+
+    relat_lista = malloc(sizeof(*relat_lista) * contarLinha("r_inscricoescanceladas.csv"));
+
+    int i = 0;
+
+    do {
+        fscanf(
+            relat,
+
+            "%c,%d,%d,%d,%[^,],%[^\n]\n",
+
+            &relat_lista[i].tipo,
+            &relat_lista[i].dia,
+            &relat_lista[i].hora,
+            &relat_lista[i].minuto,
+            relat_lista[i].aluno_nome,
+            relat_lista[i].email_aluno
+        );
+
+        i++;
+    } while (!feof(relat));
+
+
+    return relat_lista;
+}
+
