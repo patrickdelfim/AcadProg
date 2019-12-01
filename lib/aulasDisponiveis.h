@@ -21,8 +21,9 @@ struct aula {
     int minimo;
     int maximo;
     int dia;
+    int hora;
+    int minuto;
     char tipo;
-    char *horario;
     char *faixa_etaria;
 };
 
