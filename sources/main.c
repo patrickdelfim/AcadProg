@@ -69,8 +69,7 @@ int main() {
 
             /* getchar(); */
 
-            struct professor a = obterProfessorPorId(0);
-            printf("%s\n", a.nome);
+			int id1, id2;
 
             /* printf(a.id_aula != -1 ? "oi\n" : "tchau\n"); */
 
@@ -79,10 +78,13 @@ int main() {
             /* printf("Nome: %s\n", a.nome); */
             /* printf("Email: %s\n", a.email); */
 
-            /* printf("Digite id do aluno e da aula: "); */
-            /* scanf("%d %d", &id1, &id2); */
+            printf("Digite id do aluno e da aula: ");
+            scanf("%d %d", &id1, &id2);
 
-            /* cancelarInscricao(id1, id2); */
+			int retorno = cancelarInscricao(id1, id2);
+
+            if(!retorno)
+				corTexto("Algo de errado nao esta certo!", 'r');
 
             break;
         }

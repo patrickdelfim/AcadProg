@@ -15,5 +15,14 @@ void inscreverAluno();
 int salvarInscricao(int id_aluno, int id_aula);
 int cancelarInscricao(int id_aluno, int id_aula);
 
+struct relatorio {
+	char tipo;
+	int dia;
+	char horario[5];
+	char *aluno_nome;
+	char *email_aluno;
+	// telefone;
+};
+
 #endif
 

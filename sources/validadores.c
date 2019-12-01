@@ -197,7 +197,7 @@ void printId(char *caminho) {
     int id_loop, flip = 0;
 
     while (!feof(arq)) {
-        fscanf(arq, "%d,%*s,%s,%*s\n", &id_loop, nome);
+        fscanf(arq, "%d,%*[^,],%[^,],%*[^\n]\n", &id_loop, nome); // fscanf(arq, "%d,%*s,%s,%*s\n", &id_loop, nome);
 
         /*===========================================
             -=-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=--=-
