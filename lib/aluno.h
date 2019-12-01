@@ -1,3 +1,6 @@
+#ifndef ALUNO_H_
+#define ALUNO_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,4 +21,6 @@ struct aluno {
 void cadastroAluno(struct aluno cadastro, int *id_aluno);
 int salvarAluno(struct aluno aluno);
 struct aluno obterAlunoPorId(int id);
+
+#endif
 

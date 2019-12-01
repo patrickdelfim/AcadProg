@@ -1,3 +1,6 @@
+#ifndef PROFESSOR_H_
+#define PROFESSOR_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -20,3 +23,6 @@ void cadastroProfessor(struct professor cadastro, int *id_professor);
 int salvarProfessor(struct professor professor);
 
 struct professor obterProfessorPorId(int id);
+
+#endif
+

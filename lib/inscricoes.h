@@ -1,3 +1,6 @@
+#ifndef INSCRICOES_H_
+#define INSCRICOES_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,4 +14,6 @@
 void inscreverAluno();
 int salvarInscricao(int id_aluno, int id_aula);
 int cancelarInscricao(int id_aluno, int id_aula);
+
+#endif
 

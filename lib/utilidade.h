@@ -1,3 +1,6 @@
+#ifndef UTILIDADE_H_
+#define UTILIDADE_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,3 +14,6 @@ char *concat(char *str1, char *str2);
 int ultimoId(char *nomeArquivo);
 void diaSemana(int dia);
 void criarData();
+
+#endif
+

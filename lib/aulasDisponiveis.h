@@ -1,3 +1,6 @@
+#ifndef AULASDISPONIVEIS_H_
+#define AULASDISPONIVEIS_H_
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,3 +33,6 @@ int salvarAula(struct aula aula);
 char *charTipoAula(char tipo);
 
 struct aula obterAulaPorId(int id);
+
+#endif
+

@@ -1,3 +1,6 @@
+#ifndef VALIDADORES_H_
+#define VALIDADORES_H_
+
 #include <stdio.h>
 #include <string.h>
 
@@ -12,3 +15,6 @@ int validarHorario(char *horario);
 int idValido(char *caminho, int id);
 
 void printId(char *caminho);
+
+#endif
+
