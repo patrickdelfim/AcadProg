@@ -80,18 +80,17 @@ int main() {
             /* printf("Nome: %s\n", a.nome); */
             /* printf("Email: %s\n", a.email); */
 
-            printf("Digite id do prof: ");
-            scanf("%d", &id1);
+            printf("Digite os ids: ");
+            scanf("%d", &id1, &id2);
 
-            char *retorno = obterNomeProfessorPorId(id1);
+            char *retorno = cancelarInscricao(id1, id2);
 
             if (!retorno) {
                 corTexto("Algo de errado nao esta certo!", 'r');
 
-                break;
             }
 
-            printf("%s", retorno);
+			break;
         }
 
     } while (input != 'x' && input != 'X');
