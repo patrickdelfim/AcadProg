@@ -32,6 +32,7 @@ int relAulaConfirmada() {
 
     } while (!feof(aulas));
 
+    free(rel.professor_nome);
     fclose(aulas);
     fclose(professor);
     fclose(relat);
@@ -65,7 +66,7 @@ int relAulaCancelada() {
     FILE *professor = fopen("data/professor.csv", "r");
     FILE *relat = fopen("data/r_aulascanceladas.csv", "w");
 
-    int idProf, idAula, n_Alunos, verificador_Aula, validador;
+    int idProf, idAula, n_Alunos, verificador_Aula, validador, validadorDelAula, validadorConfAulas;
 
     if (aulas == NULL) {
         corTexto("Erro ao abrir o arquivo: aulas.csv\n", 'r');
@@ -95,6 +96,14 @@ int relAulaCancelada() {
 
         if (n_Alunos > verificador_Aula) {
             validador = cancelarTodasInscricao(idAula);
+            //if (validador == 0)
+            //  return 0;
+            validadorDelAula = deletarAulaCancelada(idAula);
+            //if (validadorDelAula == 0)
+            // return 0;
+            validadorConfAulas = relAulaConfirmada();
+            //if (validadorConfAulas == 0)
+            //  return 0;
 
             fprintf(relat, "%c,%d,%s,%s,%s\n", rel.tipo, rel.dia, horaString(rel.hora, rel.minuto), rel.professor_nome, rel.email);
         }
@@ -106,6 +115,58 @@ int relAulaCancelada() {
     fclose(aulas);
     fclose(professor);
     fclose(relat);
+
+    return 1;
+}
+
+int deletarAulaCancelada(int idAula) {
+    FILE *aulas = fopen("data/aulas.csv", "r");
+    FILE *aulas_aux = fopen("data/aulas~.csv", "w");
+
+    if (aulas == NULL)
+        return 0;
+
+    struct aula aula;
+
+    aula.faixa_etaria = malloc(100);
+    do {
+        fscanf(aulas, "%d,%d,%d,%d,%d,%d:%d,%c,%[^\n]\n",  // Formatacao do arquivo
+
+               &aula.id_aula,  // Campos organizados
+               &aula.id_prof,
+               &aula.minimo,
+               &aula.maximo,
+               &aula.dia,
+               &aula.hora,
+               &aula.minuto,
+               &aula.tipo,
+               aula.faixa_etaria);
+
+        if (aula.id_aula != idAula)
+
+            fprintf(
+                aulas_aux,
+                "%d,%d,%d,%d,%d,%s,%c,%s\n",
+                aula.id_aula,
+                aula.id_prof,
+                aula.minimo,
+                aula.maximo,
+                aula.dia,
+                horaString(aula.hora, aula.minuto),
+                aula.tipo,
+                aula.faixa_etaria);
+
+        else if (aula.id_aula == idAula)
+            printf("exclui um ai 2\n");
+
+    } while (!feof(aulas));
+
+    fclose(aulas);
+    fclose(aulas_aux);
+
+    remove("data/aulas.csv");
+
+    rename("data/aulas~.csv", "data/aulas.csv");
 
     return 1;
 }

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../lib/aulasDisponiveis.h"
 #include "../lib/inscricoes.h"
 #include "../lib/professor.h"
 #include "../lib/utilidade.h"
@@ -39,5 +40,7 @@ int contadorAula(int id_aula);
 int relAulaConfirmada();
 
 int relAulaCancelada();
+
+int deletarAulaCancelada(int idAula);
 
 #endif
