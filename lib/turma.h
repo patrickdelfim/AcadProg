@@ -19,5 +19,5 @@ struct relatorio {
     int qtd_aluno;
 };
 
-int confirmarAula(int id_professor, int id_aula) {
+int confirmarAula(int id_professor, int id_aula);
 #endif

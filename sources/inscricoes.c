@@ -75,7 +75,7 @@ int salvarInscricao(int id_aluno, int id_aula) {
     return 1;
 }
 
-int cancelarInscricao(int id_aluno, int id_aula) {
+int cancelarInscricao(int id_aula, int id_aluno) {
     FILE *insc = fopen("data/inscricoes.csv", "r");
     FILE *insc_aux = fopen("data/inscricoes~.csv", "w");
 
@@ -83,21 +83,20 @@ int cancelarInscricao(int id_aluno, int id_aula) {
         return 0;
     }
 
-	printf("Id aluno: %d, Id aula: %d\n", id_aluno, id_aula);
-    int id_aluno_i, id_aula_i;
+    printf("Id aluno: %d, Id aula: %d\n", id_aluno, id_aula);
+    int id_aluno_l, id_aula_l;
 
     do {
-		fscanf(insc, "%d,%d\n", &id_aula_i, &id_aluno_i);
+        fscanf(insc, "%d,%d\n", &id_aula_l, &id_aluno_l);
 
+        if (id_aula_l != id_aula || id_aluno_l != id_aluno) {
+            printf("\nnao exclui %d %d", id_aula_l, id_aluno_l);
+            fprintf(insc_aux, "%d,%d\n", id_aula_l, id_aluno_l);
 
-		if (id_aula_i != id_aula || id_aluno_i != id_aluno) {
-			printf("nao exclui %d %d\n", id_aula_i, id_aluno_i);
-			fprintf(insc_aux, "%d,%d\n", id_aula_i, id_aluno_i);
-		} else if (id_aula_i == id_aula && id_aluno_i == id_aluno) {
-			printf("Esse foi excluido");
-		}
+        } else if (id_aula_l == id_aula && id_aluno_l == id_aluno) {
+            printf("\nEsse foi excluido %d %d", id_aula_l, id_aluno_l);
+        }
 
-		
     } while (!feof(insc));
 
     fclose(insc);
@@ -105,8 +104,7 @@ int cancelarInscricao(int id_aluno, int id_aula) {
 
     remove("data/inscricoes.csv");
 
-	rename("data/inscricoes~.csv", "data/inscricoes.csv");
+    rename("data/inscricoes~.csv", "data/inscricoes.csv");
 
     return 1;
 }
-

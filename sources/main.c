@@ -69,7 +69,7 @@ int main() {
 
             /* getchar(); */
 
-			int id1, id2;
+            int id1, id2;
 
             /* printf(a.id_aula != -1 ? "oi\n" : "tchau\n"); */
 
@@ -81,10 +81,10 @@ int main() {
             printf("Digite id do aluno e da aula: ");
             scanf("%d %d", &id1, &id2);
 
-			int retorno = cancelarInscricao(id1, id2);
+            int retorno = cancelarInscricao(id1, id2);
 
-            if(!retorno)
-				corTexto("Algo de errado nao esta certo!", 'r');
+            if (!retorno)
+                corTexto("Algo de errado nao esta certo!", 'r');
 
             break;
         }
