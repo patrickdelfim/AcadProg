@@ -18,6 +18,6 @@ struct relatorio {
     char *professor_nome;
     int qtd_aluno;
 };
-
-int confirmarAula(int id_professor, int id_aula);
+int contadorAula(int id_aula);
+int relAulaConfirmada();
 #endif

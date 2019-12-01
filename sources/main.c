@@ -8,6 +8,7 @@
 #include "../lib/inscricoes.h"
 #include "../lib/menu.h"
 #include "../lib/professor.h"
+#include "../lib/turma.h"
 #include "../lib/validadores.h"
 
 int main() {
@@ -62,6 +63,8 @@ int main() {
         } else if (input == '4') {
             inscreverAluno();
 
+        } else if (input == '7') {
+            relAulaConfirmada();
         }
 
         else if (input == '0') {
@@ -78,15 +81,18 @@ int main() {
             /* printf("Nome: %s\n", a.nome); */
             /* printf("Email: %s\n", a.email); */
 
-            printf("Digite id do aluno e da aula: ");
-            scanf("%d %d", &id1, &id2);
+            printf("Digite id do prof: ");
+            scanf("%d", &id1);
 
-            int retorno = cancelarInscricao(id1, id2);
+            char *retorno = obterNomeProfessorPorId(id1);
 
-            if (!retorno)
+            if (!retorno) {
                 corTexto("Algo de errado nao esta certo!", 'r');
 
-            break;
+                break;
+            }
+
+            printf("%s", retorno);
         }
 
     } while (input != 'x' && input != 'X');

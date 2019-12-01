@@ -24,5 +24,6 @@ int salvarProfessor(struct professor professor);
 
 struct professor obterProfessorPorId(int id);
 
-#endif
+char *obterNomeProfessorPorId(int id);
 
+#endif

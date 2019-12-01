@@ -1,11 +1,14 @@
 #include "../lib/turma.h"  // structs e prototipos
+#include "../lib/professor.h"
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
 
-int confirmarAula(int id_professor, int id_aula) {
+int relAulaConfirmada() {
     FILE *aulas = fopen("data/aulas.csv", "r");
     FILE *professor = fopen("data/professor.csv", "r");
-    FILE *relat = fopen("data/r_aulasconfirmadas.csv ", "w");
+    FILE *relat = fopen("data/r_aulasconfirmadas.csv", "w");
+
+    int idProf, idaula;
 
     if (aulas == NULL) {
         corTexto("Erro ao abrir o arquivo: aulas.csv\n", 'r');
@@ -22,20 +25,40 @@ int confirmarAula(int id_professor, int id_aula) {
 
     struct relatorio rel;
 
-    rel.professor_nome = malloc(100);
-
-    /*
-    struct relatorio {
-        char tipo;
-        int dia;
-        char horario[5];
-        char *professor_nome;
-        int qtd_aluno;
-    };
-*/
-
     do {
-        fscanf(aulas, "%d,%d", &rel.tipo);
+        fscanf(aulas, "%d,%d,%*[^,],%*[^,],%d,%c,%[^,],%*[^\n]\n", &idaula, &idProf, &rel.dia, &rel.tipo, rel.horario);
+
+        rel.professor_nome = obterNomeProfessorPorId(idProf);
+        rel.qtd_aluno = contadorAula(idaula);
+
+        fprintf(relat, "%c,%d,%s,%s,%d\n", rel.tipo, rel.dia, rel.horario, rel.professor_nome, rel.qtd_aluno);
 
     } while (!feof(aulas));
+
+    fclose(aulas);
+    fclose(professor);
+    fclose(relat);
+
+    return 1;
+}
+
+int contadorAula(int id_aula) {
+    FILE *inscricao = fopen("data/inscricoes.csv", "r");
+    int contador = 0, id_aula_f;
+
+    if (inscricao == NULL) {
+        exit(1);
+    }
+    do {
+        fscanf(inscricao, "%*d,%d\n", &id_aula_f);
+
+        if (id_aula == id_aula_f) {
+            contador++;
+        }
+
+    } while (!feof(inscricao));
+
+    fclose(inscricao);
+
+    return contador;
 }

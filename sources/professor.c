@@ -224,3 +224,27 @@ struct professor obterProfessorPorId(int id) {
         return professor;
     }
 }
+
+char *obterNomeProfessorPorId(int id) {
+    int ehValido = idValido("professor.csv", id);
+    if (ehValido == 1) {
+        FILE *professor_arq = fopen("data/professor.csv", "r");
+
+        char *nome_Professor;
+        int id_prof;
+
+        nome_Professor = malloc(100);
+
+        do {
+            fscanf(professor_arq, "%d,%*[^,],%[^,],%*[^\n]\n", &id_prof, nome_Professor);
+
+            if (id_prof == id)
+                break;
+
+        } while (!feof(professor_arq));
+
+        fclose(professor_arq);
+
+        return nome_Professor;
+    }
+}
