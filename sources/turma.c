@@ -1,4 +1,5 @@
 #include "../lib/turma.h"  // structs e prototipos
+#include "../lib/inscricoes.h"
 #include "../lib/professor.h"
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
@@ -26,12 +27,12 @@ int relAulaConfirmada() {
     struct relatorio rel;
 
     do {
-        fscanf(aulas, "%d,%d,%*[^,],%*[^,],%d,%c,%[^,],%*[^\n]\n", &idaula, &idProf, &rel.dia, &rel.tipo, rel.horario);
+        fscanf(aulas, "%d,%d,%*[^,],%*[^,],%d,%d,%d,%c,%*[^\n]\n", &idaula, &idProf, &rel.dia, &rel.hora, &rel.minuto, &rel.tipo);
 
         rel.professor_nome = obterNomeProfessorPorId(idProf);
         rel.qtd_aluno = contadorAula(idaula);
 
-        fprintf(relat, "%c,%d,%s,%s,%d\n", rel.tipo, rel.dia, rel.horario, rel.professor_nome, rel.qtd_aluno);
+        fprintf(relat, "%c,%d,%s,%s,%d\n", rel.tipo, rel.dia, horaString(rel.hora, rel.minuto), rel.professor_nome, rel.qtd_aluno);
 
     } while (!feof(aulas));
 
@@ -61,4 +62,52 @@ int contadorAula(int id_aula) {
     fclose(inscricao);
 
     return contador;
+}
+
+int relAulaCancelada() {
+    FILE *aulas = fopen("data/aulas.csv", "r");
+    FILE *professor = fopen("data/professor.csv", "r");
+    FILE *relat = fopen("data/r_aulascanceladas.csv", "w");
+
+    int idProf, idAula, n_Alunos, verificador_Aula, validador;
+
+    if (aulas == NULL) {
+        corTexto("Erro ao abrir o arquivo: aulas.csv\n", 'r');
+        return 0;
+    }
+    if (professor == NULL) {
+        corTexto("Erro ao abrir o arquivo: professor.csv\n", 'r');
+        return 0;
+    }
+    if (relat == NULL) {
+        corTexto("Erro ao abrir o arquivo: r_aulasconfirmadas.csv\n", 'r');
+        return 0;
+    }
+
+    printf("digite o minimo de alunos para a aula: ");
+    scanf("%d", &n_Alunos);
+
+    struct relatorio2 rel;
+
+    do {
+        fscanf(aulas, "%d,%d,%*[^,],%*[^,],%d,%d,%d,%c,%*[^\n]\n", &idAula, &idProf, &rel.dia, &rel.hora, &rel.minuto, &rel.tipo);
+
+        verificador_Aula = contadorAula(idAula);
+
+        rel.professor_nome = obterNomeProfessorPorId(idProf);
+        rel.email = obterEmailProfessorPorId(idProf);
+
+        if (verificador_Aula < n_Alunos) {
+            //validador = cancelarTodasInscricao(idAula);
+
+            fprintf(relat, "%c,%d,%s,%*s,%s\n", rel.tipo, rel.dia, horaString(rel.hora, rel.minuto), rel.professor_nome, rel.email);
+        }
+
+    } while (!feof(aulas));
+
+    fclose(aulas);
+    fclose(professor);
+    fclose(relat);
+
+    return 1;
 }

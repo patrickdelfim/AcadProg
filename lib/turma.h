@@ -14,10 +14,21 @@
 struct relatorio {
     char tipo;
     int dia;
-    char horario[5];
+    int hora;
+    int minuto;
     char *professor_nome;
     int qtd_aluno;
 };
+
+struct relatorio2 {
+    char tipo;
+    int dia;
+    int hora;
+    int minuto;
+    char *professor_nome;
+    char *email;
+};
 int contadorAula(int id_aula);
 int relAulaConfirmada();
+int relAulaCancelada();
 #endif

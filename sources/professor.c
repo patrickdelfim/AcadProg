@@ -244,7 +244,34 @@ char *obterNomeProfessorPorId(int id) {
         } while (!feof(professor_arq));
 
         fclose(professor_arq);
+        printf("teste professor\n");
 
         return nome_Professor;
+    }
+}
+
+char *obterEmailProfessorPorId(int id) {
+    int ehValido = idValido("professor.csv", id);
+    if (ehValido == 1) {
+        FILE *professor_arq = fopen("data/professor.csv", "r");
+
+        char *email_Professor;
+        int id_prof;
+
+        email_Professor = malloc(100);
+
+        do {
+            fscanf(professor_arq, "%d,%*[^,],%*[^,],%[^\n]\n", &id_prof, email_Professor);
+
+            if (id_prof == id)
+                break;
+
+        } while (!feof(professor_arq));
+
+        fclose(professor_arq);
+
+        printf("teste email\n");
+
+        return email_Professor;
     }
 }

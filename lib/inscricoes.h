@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../lib/aluno.h"
+#include "../lib/aulasDisponiveis.h"
 #include "../lib/utilidade.h"
 #include "../lib/validadores.h"
-#include "../lib/aulasDisponiveis.h"
-#include "../lib/aluno.h"
 
 #ifdef _WIN32        // Caso o sistema operacional seja windows
 #define clear "cls"  // o clear vai ser o comando cls
@@ -17,13 +17,13 @@
 #endif
 
 struct relatorio {
-	char tipo;
-	int dia;
-	int hora;
-	int minuto;
-	char *aluno_nome;
-	char *email_aluno;
-	// telefone;
+    char tipo;
+    int dia;
+    int hora;
+    int minuto;
+    char *aluno_nome;
+    char *email_aluno;
+    // telefone;
 };
 
 void inscreverAluno();
@@ -34,5 +34,6 @@ int cancelarInscricao(int id_aluno, int id_aula);
 
 int relatorioInscricaoCancelada(int id_aluno, int id_aula);
 
-#endif
+int cancelarTodasInscricao(int id_aula);
 
+#endif

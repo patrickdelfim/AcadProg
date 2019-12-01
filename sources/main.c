@@ -62,6 +62,8 @@ int main() {
         } else if (input == '4') {
             inscreverAluno();
 
+        } else if (input == '6') {
+            relAulaCancelada();
         } else if (input == '7') {
             relAulaConfirmada();
         }
@@ -80,17 +82,17 @@ int main() {
             /* printf("Nome: %s\n", a.nome); */
             /* printf("Email: %s\n", a.email); */
 
-            printf("Digite os ids: ");
-            scanf("%d", &id1, &id2);
-
+            printf("Digite o id 1: ");
+            scanf("%d", &id1);
+            printf("Digite o id 2: ");
+            scanf("%d", &id2);
             char *retorno = cancelarInscricao(id1, id2);
 
             if (!retorno) {
                 corTexto("Algo de errado nao esta certo!", 'r');
-
             }
 
-			break;
+            break;
         }
 
     } while (input != 'x' && input != 'X');
