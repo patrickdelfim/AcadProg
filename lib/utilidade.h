@@ -15,6 +15,7 @@ int ultimoId(char *nomeArquivo);
 void diaSemana(int dia);
 void criarData();
 char *horaString(int hora, int minuto);
+int contarLinha(char *arquivo);
 
 #endif
 

@@ -173,3 +173,20 @@ char *horaString(int hora, int minuto) {
 
     return retorno;
 }
+
+int contarLinha(char *arquivo) {
+    FILE *arq = fopen(concat("data/", arquivo), "r");
+
+    int count = 0;
+    char ch;
+
+    do {
+        fscanf(arq, "%*[^\n]%c", &ch); // recebe somente \n
+
+        count++;
+    } while (!feof(arq));
+
+    fclose(arq);
+
+    return --count;
+}

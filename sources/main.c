@@ -70,24 +70,6 @@ int main() {
             relAulaConfirmada();
         }
 
-        else if (input == '0') {
-            // teste
-
-            int id1, id2;
-
-            printf("Digite o id 1: ");
-            scanf("%d", &id1);
-            printf("Digite o id 2: ");
-            scanf("%d", &id2);
-            char *retorno = cancelarInscricao(id1, id2);
-
-            if (!retorno) {
-                corTexto("Algo de errado nao esta certo!\n", 'r');
-            }
-
-            break;
-        }
-
     } while (input != 'x' && input != 'X');
 
     return 0;
