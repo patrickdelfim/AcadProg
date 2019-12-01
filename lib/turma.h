@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../lib/inscricoes.h"
+#include "../lib/professor.h"
+#include "../lib/utilidade.h"
+#include "../lib/validadores.h"
+
 #ifdef _WIN32        // Caso o sistema operacional seja windows
 #define clear "cls"  // o clear vai ser o comando cls
 #endif
@@ -28,7 +33,11 @@ struct relatorio2 {
     char *professor_nome;
     char *email;
 };
+
 int contadorAula(int id_aula);
+
 int relAulaConfirmada();
+
 int relAulaCancelada();
+
 #endif

@@ -1,8 +1,4 @@
 #include "../lib/turma.h"  // structs e prototipos
-#include "../lib/inscricoes.h"
-#include "../lib/professor.h"
-#include "../lib/utilidade.h"
-#include "../lib/validadores.h"
 
 int relAulaConfirmada() {
     FILE *aulas = fopen("data/aulas.csv", "r");

@@ -32,14 +32,10 @@ int main() {
 
             cadastroAluno(alunoCadastrado, &id_atual_aluno);
 
-            // eu acho que temos que dar um free e salvar o arquivo dentro da funcao cadastroAluno
-            // free(alunoCadastrado.cpf);
-            // free(alunoCadastrado.nome);
-            // free(alunoCadastrado.email);
+            free(alunoCadastrado.cpf);
+            free(alunoCadastrado.nome);
+            free(alunoCadastrado.email);
 
-            // printf("%s\n", alunoCadastrado.cpf);
-            // printf("%s\n", alunoCadastrado.nome);
-            // printf("%d\n", strlen(alunoCadastrado.nome)); // Adicionar um realloc no nome do aluno
         } else if (input == '2') {
             // cadastro professor
 
@@ -50,6 +46,10 @@ int main() {
 
             cadastroProfessor(profCadastrado, &id_atual_professor);
 
+            free(profCadastrado.cpf);
+            free(profCadastrado.nome);
+            free(profCadastrado.email);
+
         } else if (input == '3') {
             // cadastro aula
 
@@ -58,6 +58,8 @@ int main() {
             aulaCadastro.faixa_etaria = malloc(sizeof(char) * 6);
 
             cadastroAula(aulaCadastro, &id_atual_aula);
+
+            free(aulaCadastro.faixa_etaria);
 
         } else if (input == '4') {
             inscreverAluno();
@@ -71,16 +73,7 @@ int main() {
         else if (input == '0') {
             // teste
 
-            /* getchar(); */
-
             int id1, id2;
-
-            /* printf(a.id_aula != -1 ? "oi\n" : "tchau\n"); */
-
-            /* printf("Id: %d\n", a.id_aluno); */
-            /* printf("CPF: %s\n", a.cpf); */
-            /* printf("Nome: %s\n", a.nome); */
-            /* printf("Email: %s\n", a.email); */
 
             printf("Digite o id 1: ");
             scanf("%d", &id1);
@@ -89,7 +82,7 @@ int main() {
             char *retorno = cancelarInscricao(id1, id2);
 
             if (!retorno) {
-                corTexto("Algo de errado nao esta certo!", 'r');
+                corTexto("Algo de errado nao esta certo!\n", 'r');
             }
 
             break;

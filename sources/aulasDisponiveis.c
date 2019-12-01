@@ -1,6 +1,4 @@
 #include "../lib/aulasDisponiveis.h"  // structs e prototipos
-#include "../lib/utilidade.h"
-#include "../lib/validadores.h"
 
 void cadastroAula(struct aula cadastro, int *id_aula) {
     char salvarOpcao;
@@ -318,14 +316,13 @@ int salvarAula(struct aula aula) {
 
     fprintf(
         fptr,
-        "%d,%d,%d,%d,%d,%d:%d,%c,%s\n",
+        "%d,%d,%d,%d,%d,%s,%c,%s\n",
         aula.id_aula,
         aula.id_prof,
         aula.minimo,
         aula.maximo,
         aula.dia,
-        aula.hora,
-		aula.minuto,
+        horaString(aula.hora, aula.minuto),
         aula.tipo,
         aula.faixa_etaria);
 
@@ -403,10 +400,10 @@ struct aula obterAulaPorId(int id) {
         aula.minimo = -1;
         aula.maximo = -1;
         aula.dia = -1;
-		aula.hora = -1;
-		aula.minuto = -1;
-		aula.tipo = '0';
-		aula.faixa_etaria = NULL;
+        aula.hora = -1;
+        aula.minuto = -1;
+        aula.tipo = '0';
+        aula.faixa_etaria = NULL;
 
         return aula;
     }
