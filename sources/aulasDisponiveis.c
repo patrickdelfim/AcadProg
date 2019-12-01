@@ -4,6 +4,7 @@
 
 void cadastroAula(struct aula cadastro, int *id_aula) {
     char salvarOpcao;
+    char *strHorario;
 
     system(clear);
 
@@ -86,19 +87,32 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
 
     printf("Horario da aula no formato HH:MM: ");
     getchar();
-    fgets(cadastro.horario, 6, stdin);
+	int scf;
+	scf = scanf("%d:%d", &cadastro.hora, &cadastro.minuto);
 
     /* funcao validarHorario. */
 
-    while (validarHorario(cadastro.horario) != 1) {
+    while (validarHorario(cadastro.hora, cadastro.minuto) != 1 && scf != 2) {
         system(clear);
 
         corTexto("O formato do horario inserido esta incorreto \n", 'r');
 
         printf("Por favor insira as informacoes da aula:\n\n");
+
+		printf("Tipo de aula: ");
+		corTexto(charTipoAula(cadastro.tipo), 'g');
+		printf("\n");
+
+		printf("Dia da semana: ");
+		diaSemana(cadastro.dia);
+
+		printf("\n");
+
         printf("Horario da aula no formato HH:MM: ");
-        fgets(cadastro.horario, 6, stdin);
+		scf = scanf("%d:%d", &cadastro.hora, &cadastro.minuto);
     }
+
+	strHorario = horaString(cadastro.hora, cadastro.minuto);
 
     /* Cadastro id professor */
 
@@ -116,7 +130,7 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
         printf("\n");
 
         printf("Horario da aula: ");
-        corTexto(cadastro.horario, 'g');
+        corTexto(strHorario, 'g');
         printf("\n");
 
         printId("professor.csv");
@@ -132,34 +146,6 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
 
     } while (idValido("professor.csv", cadastro.id_prof) != 1);
 
-    /*
-    do {
-        // Cadastro id aluno
-
-        system(clear);
-
-        printf("Por favor insira as informacoes da aula:\n\n");
-
-        printf("Tipo de aula: ");
-        corTexto(charTipoAula(cadastro.tipo), 'g');
-        printf("\n");
-
-        printf("Dia da semana: ");
-        diaSemana(cadastro.dia);
-        printf("\n");
-
-        printf("Horario da aula: ");
-        corTexto(cadastro.horario, 'g');
-        printf("\n");
-
-        printf("ID Professor: %d", cadastro.id_prof);
-        printf("\n");
-
-        printf("Cadastro ID aluno: ");
-        scanf("%d", &cadastro.id_aluno);
-
-    } while (idValido("aluno.csv", cadastro.id_aluno) != 1);
-	*/
 
     /* Cadastro min turma */
     cadastro.minimo = 1000;
@@ -184,7 +170,7 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
         printf("\n");
 
         printf("Horario da aula: ");
-        corTexto(cadastro.horario, 'g');
+        corTexto(strHorario, 'g');
         printf("\n");
 
         printf("ID Professor: %d", cadastro.id_prof);
@@ -212,7 +198,7 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
         printf("\n");
 
         printf("Horario da aula: ");
-        corTexto(cadastro.horario, 'g');
+        corTexto(strHorario, 'g');
         printf("\n");
 
         printf("ID Professor: %d", cadastro.id_prof);
@@ -248,7 +234,7 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
     printf("\n");
 
     printf("Horario da aula: ");
-    corTexto(cadastro.horario, 'g');
+	corTexto(strHorario, 'g');
     printf("\n");
 
     printf("ID Professor: %d", cadastro.id_prof);
@@ -282,7 +268,7 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
         printf("\n");
 
         printf("Horario da aula: ");
-        corTexto(cadastro.horario, 'g');
+		corTexto(strHorario, 'g');
         printf("\n");
 
         printf("ID Professor: %d", cadastro.id_prof);
@@ -298,7 +284,6 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
         corTexto(cadastro.faixa_etaria, 'g');
         printf("\n");
 
-        cadastro.horario = stringNewLine(cadastro.horario);
         cadastro.faixa_etaria = stringNewLine(cadastro.faixa_etaria);
 
         printf("Deseja salvar essa aula cadastrada?\n");
@@ -318,6 +303,7 @@ void cadastroAula(struct aula cadastro, int *id_aula) {
 
     if (retorno) {
         *id_aula += 1;
+		free(strHorario);
     } else {
         corTexto("Erro ao abrir o arquivo\n", 'r');
     }
@@ -332,14 +318,15 @@ int salvarAula(struct aula aula) {
 
     fprintf(
         fptr,
-        "%d,%d,%d,%d,%d,%c,%s,%s\n",
+        "%d,%d,%d,%d,%d,%d:%d,%c,%s\n",
         aula.id_aula,
         aula.id_prof,
         aula.minimo,
         aula.maximo,
         aula.dia,
+        aula.hora,
+		aula.minuto,
         aula.tipo,
-        aula.horario,
         aula.faixa_etaria);
 
     fclose(fptr);
@@ -369,22 +356,22 @@ struct aula obterAulaPorId(int id) {
         FILE *aulas_arq = fopen("data/aulas.csv", "r");
 
         struct aula aula;
-        aula.horario = malloc(100);
         aula.faixa_etaria = malloc(100);
 
         do {
             fscanf(
                 aulas_arq,  // Ponteiro pro aquivo
 
-                "%d,%d,%d,%d,%d,%c,%[^,],%[^\n]\n",  // Formatacao do arquivo
+                "%d,%d,%d,%d,%d,%d:%d,%c,%[^\n]\n",  // Formatacao do arquivo
 
                 &aula.id_aula,  // Campos organizados
                 &aula.id_prof,
                 &aula.minimo,
                 &aula.maximo,
                 &aula.dia,
+                &aula.hora,
+                &aula.minuto,
                 &aula.tipo,
-                aula.horario,
                 aula.faixa_etaria);
 
             if (aula.id_aula == id)
@@ -395,8 +382,9 @@ struct aula obterAulaPorId(int id) {
                 aula.minimo = -1;
                 aula.maximo = -1;
                 aula.dia = -1;
+                aula.hora = -1;
+                aula.minuto = -1;
                 aula.tipo = '0';
-                aula.horario = NULL;
                 aula.faixa_etaria = NULL;
 
                 return aula;
@@ -415,9 +403,10 @@ struct aula obterAulaPorId(int id) {
         aula.minimo = -1;
         aula.maximo = -1;
         aula.dia = -1;
-        aula.tipo = '0';
-        aula.horario = NULL;
-        aula.faixa_etaria = NULL;
+		aula.hora = -1;
+		aula.minuto = -1;
+		aula.tipo = '0';
+		aula.faixa_etaria = NULL;
 
         return aula;
     }

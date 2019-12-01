@@ -20,6 +20,26 @@ void corTexto(char *texto, char opcao) {
     }
 }
 
+void corInt(int numero, char opcao) {
+    switch (opcao) {
+        case 'r':
+            printf("\e[0;91m");
+            printf("%d", numero);
+            printf("\e[0m");
+            break;
+        case 'g':
+            printf("\e[0;92m");
+            printf("%d", numero);
+            printf("\e[0m");
+            break;
+        case 'y':
+            printf("\e[0;93m");
+            printf("%d", numero);
+            printf("\e[0m");
+            break;
+    }
+}
+
 char *stringNewLine(char *str) {
     // Funcao para remover o \n
 
@@ -137,4 +157,19 @@ void criarData() {
 			system("chmod 775 data");
 		#endif
 	}
+}
+
+char *horaString(int hora, int minuto) {
+	char *retorno = malloc(6);
+
+	if(hora < 10 && minuto < 10)
+		sprintf(retorno, "0%d:0%d", hora, minuto);
+	else if (hora < 10)
+		sprintf(retorno, "0%d:%d", hora, minuto);
+	else if (minuto < 10)
+		sprintf(retorno, "%d:0%d", hora, minuto);
+	else
+		sprintf(retorno, "%d:%d", hora, minuto);
+
+	return retorno;
 }

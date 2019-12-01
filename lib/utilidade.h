@@ -14,6 +14,7 @@ char *concat(char *str1, char *str2);
 int ultimoId(char *nomeArquivo);
 void diaSemana(int dia);
 void criarData();
+char *horaString(int hora, int minuto);
 
 #endif
 
