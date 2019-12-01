@@ -27,7 +27,7 @@ int relAulaConfirmada() {
     struct relatorio rel;
 
     do {
-        fscanf(aulas, "%d,%d,%*[^,],%*[^,],%d,%d,%d,%c,%*[^\n]\n", &idaula, &idProf, &rel.dia, &rel.hora, &rel.minuto, &rel.tipo);
+        fscanf(aulas, "%d,%d,%*[^,],%*[^,],%d,%d:%d,%c,%*[^\n]\n", &idaula, &idProf, &rel.dia, &rel.hora, &rel.minuto, &rel.tipo);
 
         rel.professor_nome = obterNomeProfessorPorId(idProf);
         rel.qtd_aluno = contadorAula(idaula);
@@ -90,21 +90,23 @@ int relAulaCancelada() {
     struct relatorio2 rel;
 
     do {
-        fscanf(aulas, "%d,%d,%*[^,],%*[^,],%d,%d,%d,%c,%*[^\n]\n", &idAula, &idProf, &rel.dia, &rel.hora, &rel.minuto, &rel.tipo);
+        fscanf(aulas, "%d,%d,%*[^,],%*[^,],%d,%d:%d,%c,%*[^\n]\n", &idAula, &idProf, &rel.dia, &rel.hora, &rel.minuto, &rel.tipo);
 
         verificador_Aula = contadorAula(idAula);
 
         rel.professor_nome = obterNomeProfessorPorId(idProf);
         rel.email = obterEmailProfessorPorId(idProf);
 
-        if (verificador_Aula < n_Alunos) {
-            //validador = cancelarTodasInscricao(idAula);
+        if (n_Alunos > verificador_Aula) {
+            validador = cancelarTodasInscricao(idAula);
 
-            fprintf(relat, "%c,%d,%s,%*s,%s\n", rel.tipo, rel.dia, horaString(rel.hora, rel.minuto), rel.professor_nome, rel.email);
+            fprintf(relat, "%c,%d,%s,%s,%s\n", rel.tipo, rel.dia, horaString(rel.hora, rel.minuto), rel.professor_nome, rel.email);
         }
 
     } while (!feof(aulas));
 
+    free(rel.professor_nome);
+    free(rel.email);
     fclose(aulas);
     fclose(professor);
     fclose(relat);

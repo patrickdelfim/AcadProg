@@ -84,7 +84,7 @@ char *concat(char *str1, char *str2) {
 
     int tamTotal = strlen(str1) + strlen(str2);
     char *retorno;
-	retorno = malloc(tamTotal + 1);
+    retorno = malloc(tamTotal + 1);
 
     strncpy(retorno, str1, tamTotal);
 
@@ -111,7 +111,7 @@ int ultimoId(char *caminho) {
         }
     } while (!feof(arq));
 
-	fclose(arq);
+    fclose(arq);
     return id;
 }
 
@@ -144,32 +144,32 @@ void diaSemana(int dia) {
 }
 
 void criarData() {
-	// Funcao para criar a pasta data se nao houver
+    // Funcao para criar a pasta data se nao houver
 
-	DIR *pasta = opendir("data");
+    DIR *pasta = opendir("data");
 
-	if (!pasta) {
-		#ifdef _WIN32
-			system("mkdir data");
-		#endif
-		#if defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
-			system("mkdir data");
-			system("chmod 775 data");
-		#endif
-	}
+    if (!pasta) {
+#ifdef _WIN32
+        system("mkdir data");
+#endif
+#if defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))
+        system("mkdir data");
+        system("chmod 775 data");
+#endif
+    }
 }
 
 char *horaString(int hora, int minuto) {
-	char *retorno = malloc(6);
+    char *retorno = malloc(6);
 
-	if(hora < 10 && minuto < 10)
-		sprintf(retorno, "0%d:0%d", hora, minuto);
-	else if (hora < 10)
-		sprintf(retorno, "0%d:%d", hora, minuto);
-	else if (minuto < 10)
-		sprintf(retorno, "%d:0%d", hora, minuto);
-	else
-		sprintf(retorno, "%d:%d", hora, minuto);
+    if (hora < 10 && minuto < 10)
+        sprintf(retorno, "0%d:0%d", hora, minuto);
+    else if (hora < 10)
+        sprintf(retorno, "0%d:%d", hora, minuto);
+    else if (minuto < 10)
+        sprintf(retorno, "%d:0%d", hora, minuto);
+    else
+        sprintf(retorno, "%d:%d", hora, minuto);
 
-	return retorno;
+    return retorno;
 }
