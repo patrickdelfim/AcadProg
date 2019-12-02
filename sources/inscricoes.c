@@ -168,6 +168,25 @@ int ordenarRelatorio() {
     if (aux == NULL)
         return 0;
     
+    struct relatorio *lista = listarRelatorios();
+    int tam = contarLinha("r_inscricoescanceladas.csv");
+
+    int ordenado = 0;
+
+    while(!ordenado) {
+        for(int i = 0; i < tam; i++) {
+            ordenado = 0;
+            if (lista[i].dia < lista[i + 1].dia) {
+                trocarRelatorio(&lista[i], &lista[i + 1]);
+                ordenado = 1;
+            }
+        }
+    }
+
+    for(int i = 0; i < tam + 1; i++) {
+        printf("%c ", lista[i].tipo);
+        printf("%d\n", lista[i].dia);
+    }
 }
 
 struct relatorio *listarRelatorios() {
@@ -176,17 +195,22 @@ struct relatorio *listarRelatorios() {
     if (relat == NULL)
         return NULL;
 
-    struct relatorio *relat_lista;
+    int tam = contarLinha("r_inscricoescanceladas.csv");
 
-    relat_lista = malloc(sizeof(*relat_lista) * contarLinha("r_inscricoescanceladas.csv"));
+    struct relatorio *relat_lista;
+    relat_lista = malloc(sizeof(*relat_lista) * tam);
 
     int i = 0;
 
+
     do {
+        relat_lista[i].aluno_nome = malloc(100);
+        relat_lista[i].email_aluno = malloc(100);
+
         fscanf(
             relat,
 
-            "%c,%d,%d,%d,%[^,],%[^\n]\n",
+            "%c,%d,%d:%d,%[^,],%[^\n]\n",
 
             &relat_lista[i].tipo,
             &relat_lista[i].dia,
@@ -199,7 +223,17 @@ struct relatorio *listarRelatorios() {
         i++;
     } while (!feof(relat));
 
+    fclose(relat);
 
     return relat_lista;
 }
 
+void trocarRelatorio(struct relatorio *relat1, struct relatorio *relat2) {
+    // TODO:
+    // invereter a posicao dos relatorios na lista!
+
+    struct relatorio temp = *relat1;
+
+    *relat1 = *relat2;
+    *relat2 = temp;
+}

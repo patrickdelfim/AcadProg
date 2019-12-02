@@ -69,6 +69,19 @@ int main() {
         } else if (input == '7') {
             relAulaConfirmada();
         }
+        
+        else if (input == '0') {
+
+
+            struct relatorio *lista = listarRelatorios();
+
+            printf("%s\n", lista[1].aluno_nome);
+            printf("%s\n", lista[1].email_aluno);
+
+            ordenarRelatorio();
+
+            break;
+        }
 
     } while (input != 'x' && input != 'X');
 
