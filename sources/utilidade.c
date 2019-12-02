@@ -181,7 +181,7 @@ int contarLinha(char *arquivo) {
     char ch;
 
     do {
-        fscanf(arq, "%*[^\n]%c", &ch); // recebe somente \n
+        fscanf(arq, "%*[^\n]%c", &ch);  // recebe somente \n
 
         count++;
     } while (!feof(arq));

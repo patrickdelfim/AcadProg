@@ -120,7 +120,7 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
     aula = obterAulaPorId(id_aula);
 
     if (aula.id_aula == -1) {
-        printf  ("Id aula invalida\n");
+        printf("Id aula invalida\n");
         return 0;
     }
 
@@ -148,42 +148,61 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
         rel.email_aluno);
 
     fclose(relat);
-
+    /*
     free(aluno.cpf);
     free(aluno.nome);
     free(aluno.email);
     free(aula.faixa_etaria);
     free(rel.aluno_nome);
     free(rel.email_aluno);
-
+*/
     return 1;
 }
 
 int ordenarRelatorio() {
     FILE *relat = fopen("data/r_inscricoescanceladas.csv", "r");
-    FILE *aux = fopen("data/aux", "w");
+    FILE *aux = fopen("data/aux.csv", "w");
 
     if (relat == NULL)
         return 0;
     if (aux == NULL)
         return 0;
-    
+
     struct relatorio *lista = listarRelatorios();
     int tam = contarLinha("r_inscricoescanceladas.csv");
 
-    int ordenado = 0;
-
-    while(!ordenado) {
-        for(int i = 0; i < tam; i++) {
-            ordenado = 0;
+    for (int j = 0; j < tam - 1; j++) {
+        for (int i = 0; i < tam - 1 - j; i++) {
+            //ordenado = 0;
             if (lista[i].dia < lista[i + 1].dia) {
                 trocarRelatorio(&lista[i], &lista[i + 1]);
-                ordenado = 1;
+            } else if (lista[i].dia == lista[i + 1].dia && lista[i].hora < lista[i + 1].hora) {
+                trocarRelatorio(&lista[i], &lista[i + 1]);
+            } else if (lista[i].dia == lista[i + 1].dia && lista[i].hora == lista[i + 1].hora && lista[i].minuto < lista[i + 1].minuto) {
+                trocarRelatorio(&lista[i], &lista[i + 1]);
             }
         }
     }
 
-    for(int i = 0; i < tam + 1; i++) {
+    for (int i = 0; i < tam; i++) {
+        fprintf(aux, "%c,%d,%d:%d,%s,%s\n",
+
+                lista[i].tipo,
+                lista[i].dia,
+                lista[i].hora,
+                lista[i].minuto,
+                lista[i].aluno_nome,
+                lista[i].email_aluno);
+    }
+
+    fclose(relat);
+    fclose(aux);
+
+    remove("data/r_inscricoescanceladas.csv");
+
+    rename("data/aux.csv", "data/r_inscricoescanceladas.csv");
+
+    for (int i = 0; i < tam; i++) {
         printf("%c ", lista[i].tipo);
         printf("%d\n", lista[i].dia);
     }
@@ -202,7 +221,6 @@ struct relatorio *listarRelatorios() {
 
     int i = 0;
 
-
     do {
         relat_lista[i].aluno_nome = malloc(100);
         relat_lista[i].email_aluno = malloc(100);
@@ -217,8 +235,7 @@ struct relatorio *listarRelatorios() {
             &relat_lista[i].hora,
             &relat_lista[i].minuto,
             relat_lista[i].aluno_nome,
-            relat_lista[i].email_aluno
-        );
+            relat_lista[i].email_aluno);
 
         i++;
     } while (!feof(relat));

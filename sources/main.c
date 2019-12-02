@@ -19,6 +19,8 @@ int main() {
     int id_atual_aula = ultimoId("aulas.csv") + 1;
     int id_atual_aluno = ultimoId("aluno.csv") + 1;
     int id_atual_professor = ultimoId("professor.csv") + 1;
+    int id_aula;
+    int id_aluno;
     do {
         input = menuInicial();
 
@@ -63,20 +65,29 @@ int main() {
 
         } else if (input == '4') {
             inscreverAluno();
+        } else if (input == '5') {
+            do {
+                system(clear);
+
+                printf("digite o id do aluno");
+                scanf("%d", &id_aluno);
+                printf("digite o id da aula");
+                scanf("%d", &id_aula);
+            } while (idValido("aluno.csv", id_aluno) != 1 || idValido("aulas.csv", id_aula) != 1);
+
+            cancelarInscricao(id_aluno, id_aula);
 
         } else if (input == '6') {
             relAulaCancelada();
         } else if (input == '7') {
             relAulaConfirmada();
         }
-        
+
         else if (input == '0') {
-
-
             struct relatorio *lista = listarRelatorios();
 
-            printf("%s\n", lista[1].aluno_nome);
-            printf("%s\n", lista[1].email_aluno);
+            printf("%s\n", lista[0].aluno_nome);
+            printf("%s\n", lista[0].email_aluno);
 
             ordenarRelatorio();
 
