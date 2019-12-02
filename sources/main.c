@@ -21,6 +21,8 @@ int main() {
     int id_atual_professor = ultimoId("professor.csv") + 1;
     int id_aula;
     int id_aluno;
+    int validarAula = 1;
+    int validarAluno = 1;
     do {
         input = menuInicial();
 
@@ -68,12 +70,21 @@ int main() {
         } else if (input == '5') {
             do {
                 system(clear);
-
-                printf("digite o id do aluno");
+                if (validarAluno != 1) {
+                    corTexto("Erro no id do aluno. Tente novamente!!\n", 'r');
+                }
+                if (validarAula != 1) {
+                    corTexto("Erro no id da aula. Tente novamente!!\n", 'r');
+                }
+                printf("digite o id do aluno: ");
                 scanf("%d", &id_aluno);
-                printf("digite o id da aula");
+                printf("digite o id da aula: ");
                 scanf("%d", &id_aula);
-            } while (idValido("aluno.csv", id_aluno) != 1 || idValido("aulas.csv", id_aula) != 1);
+
+                validarAluno = idValido("aluno.csv", id_aluno);
+                validarAula = idValido("aulas.csv", id_aula);
+
+            } while (validarAluno != 1 || validarAula != 1);
 
             cancelarInscricao(id_aluno, id_aula);
 

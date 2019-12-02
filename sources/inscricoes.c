@@ -148,6 +148,7 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
         rel.email_aluno);
 
     fclose(relat);
+    // LIBERAR MEMORIA AQUI ESTA CAUSANDO CONFLITO NO CANCELAR INSCRICAO
     /*
     free(aluno.cpf);
     free(aluno.nome);
