@@ -12,7 +12,6 @@
 #include "../lib/validadores.h"
 
 int main() {
-    /* criarData(); */
 
     char input;
 

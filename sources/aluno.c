@@ -1,6 +1,4 @@
 #include "../lib/aluno.h"  // structs e prototipos
-#include "../lib/utilidade.h"
-#include "../lib/validadores.h"
 
 void cadastroAluno(struct aluno cadastro, int *id_aluno) {
     char salvarOpcao;
