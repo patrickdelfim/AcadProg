@@ -16,7 +16,7 @@
 #if defined(unix) || defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__))  // Caso seja unix like
 #define clear "clear"                                                                                   // o clear sera o comando clear
 #endif
-
+//Struct aulas confirmadas
 struct relatorio {
     char tipo;
     int dia;
@@ -26,6 +26,7 @@ struct relatorio {
     int qtd_aluno;
 };
 
+//Struct aulas canceladas
 struct relatorio2 {
     char tipo;
     int dia;
@@ -37,10 +38,18 @@ struct relatorio2 {
 
 int contadorAula(int id_aula);
 
-int relAulaConfirmada();
-
-int relAulaCancelada();
-
 int deletarAulaCancelada(int idAula);
+
+// PROTOTIPO RELATORIO AULA CANCELADA
+int relAulaConfirmada();
+int ordenarRelatorioAulasConfirmadas();
+struct relatorio *listarAulasConfirmadas();
+void trocarRelatorioAulasConfirmadas(struct relatorio *relat1, struct relatorio *relat2);
+
+// PROTOTIPO RELATORIO AULA CANCELADA
+int relAulaCancelada();
+int ordenarRelatorioAulasCanceladas();
+struct relatorio2 *listarAulasCanceladas();
+void trocarRelatorioAulasCanceladas(struct relatorio2 *relat1, struct relatorio2 *relat2);
 
 #endif

@@ -88,19 +88,22 @@ int main() {
 
             cancelarInscricao(id_aluno, id_aula);
 
+            ordenarRelatorioInscCanceladas();
+
         } else if (input == '6') {
             relAulaCancelada();
+            ordenarRelatorioAulasCanceladas();
         } else if (input == '7') {
             relAulaConfirmada();
+
+            ordenarRelatorioAulasConfirmadas();
         }
 
         else if (input == '0') {
-            struct relatorio *lista = listarRelatorios();
+            ordenarRelatorioInscCanceladas();
 
-            printf("%s\n", lista[0].aluno_nome);
-            printf("%s\n", lista[0].email_aluno);
-
-            ordenarRelatorio();
+            ordenarRelatorioAulasConfirmadas();
+            ordenarRelatorioAulasCanceladas();
 
             break;
         }

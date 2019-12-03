@@ -160,7 +160,7 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula) {
     return 1;
 }
 
-int ordenarRelatorio() {
+int ordenarRelatorioInscCanceladas() {
     FILE *relat = fopen("data/r_inscricoescanceladas.csv", "r");
     FILE *aux = fopen("data/aux.csv", "w");
 
@@ -169,18 +169,18 @@ int ordenarRelatorio() {
     if (aux == NULL)
         return 0;
 
-    struct relatorio *lista = listarRelatorios();
+    struct relatorio *lista = listarRelatoriosInscCanceladas();
     int tam = contarLinha("r_inscricoescanceladas.csv");
 
     for (int j = 0; j < tam - 1; j++) {
         for (int i = 0; i < tam - 1 - j; i++) {
             //ordenado = 0;
             if (lista[i].dia < lista[i + 1].dia) {
-                trocarRelatorio(&lista[i], &lista[i + 1]);
+                trocarRelatorioInscCanceladas(&lista[i], &lista[i + 1]);
             } else if (lista[i].dia == lista[i + 1].dia && lista[i].hora < lista[i + 1].hora) {
-                trocarRelatorio(&lista[i], &lista[i + 1]);
+                trocarRelatorioInscCanceladas(&lista[i], &lista[i + 1]);
             } else if (lista[i].dia == lista[i + 1].dia && lista[i].hora == lista[i + 1].hora && lista[i].minuto < lista[i + 1].minuto) {
-                trocarRelatorio(&lista[i], &lista[i + 1]);
+                trocarRelatorioInscCanceladas(&lista[i], &lista[i + 1]);
             }
         }
     }
@@ -209,7 +209,7 @@ int ordenarRelatorio() {
     }
 }
 
-struct relatorio *listarRelatorios() {
+struct relatorio *listarRelatoriosInscCanceladas() {
     FILE *relat = fopen("data/r_inscricoescanceladas.csv", "r");
 
     if (relat == NULL)
@@ -246,7 +246,7 @@ struct relatorio *listarRelatorios() {
     return relat_lista;
 }
 
-void trocarRelatorio(struct relatorio *relat1, struct relatorio *relat2) {
+void trocarRelatorioInscCanceladas(struct relatorio *relat1, struct relatorio *relat2) {
     // TODO:
     // invereter a posicao dos relatorios na lista!
 

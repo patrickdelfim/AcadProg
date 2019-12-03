@@ -36,10 +36,10 @@ int relatorioInscricaoCancelada(int id_aluno, int id_aula);
 
 int cancelarTodasInscricao(int id_aula);
 
-int ordenarRelatorio();
+int ordenarRelatorioInscCanceladas();
 
-struct relatorio *listarRelatorios();
+struct relatorio *listarRelatoriosInscCanceladas();
 
-void trocarRelatorio(struct relatorio *relat1, struct relatorio *relat2);
+void trocarRelatorioInscCanceladas(struct relatorio *relat1, struct relatorio *relat2);
 
 #endif
