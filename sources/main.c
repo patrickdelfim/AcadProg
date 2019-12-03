@@ -80,8 +80,16 @@ int main() {
                 if (validarAula != 1) {
                     corTexto("Erro no id da aula. Tente novamente!!\n", 'r');
                 }
-                printf("digite o id do aluno: ");
+                printf("Lista de Ids dos alunos: \n");
+                printId("aluno.csv");
+                printf("\ndigite o id do aluno: ");
                 scanf("%d", &id_aluno);
+
+                system(clear);
+
+                printf("Lista de Ids das aulas: \n");
+                printIdAula();
+
                 printf("digite o id da aula: ");
                 scanf("%d", &id_aula);
 
@@ -98,6 +106,7 @@ int main() {
             // gerar relatorio de aula cancelada e organizar de forma cronologica
 
             relAulaCancelada();
+
             ordenarRelatorioAulasCanceladas();
         } else if (input == '7') {
             // gerar relatorio de aula confirmada e organizar de forma cronologica

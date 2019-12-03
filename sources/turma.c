@@ -61,6 +61,10 @@ int contadorAula(int id_aula) {
     return contador;
 }
 
+/*Funcao de gerar relatorio de aula cancelada tambem exercendo a as funcoes
+de deletar todas as ocorrencias do id da aula em incricoes, atualizando o arquivo de aulas confirmadas
+e deletando a aula do arquivo aula.csv*/
+
 int relAulaCancelada() {
     FILE *aulas = fopen("data/aulas.csv", "r");
     FILE *professor = fopen("data/professor.csv", "r");
