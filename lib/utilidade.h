@@ -7,6 +7,8 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "../lib/aulasDisponiveis.h"
+
 void corTexto(char *texto, char opcao);
 char *stringNewLine(char *str);
 void cleanBuffer(char *str);
@@ -16,5 +18,6 @@ void diaSemana(int dia);
 void criarData();
 char *horaString(int hora, int minuto);
 int contarLinha(char *arquivo);
-
+void printId(char *caminho);
+void printIdAula();
 #endif

@@ -66,8 +66,12 @@ int main() {
             free(aulaCadastro.faixa_etaria);
 
         } else if (input == '4') {
+            // inscrever aluno em aula
+
             inscreverAluno();
         } else if (input == '5') {
+            // cancelar inscricao de aluno e gerar relatorio organizado
+
             do {
                 system(clear);
                 if (validarAluno != 1) {
@@ -91,9 +95,13 @@ int main() {
             ordenarRelatorioInscCanceladas();
 
         } else if (input == '6') {
+            // gerar relatorio de aula cancelada e organizar de forma cronologica
+
             relAulaCancelada();
             ordenarRelatorioAulasCanceladas();
         } else if (input == '7') {
+            // gerar relatorio de aula confirmada e organizar de forma cronologica
+
             relAulaConfirmada();
 
             ordenarRelatorioAulasConfirmadas();

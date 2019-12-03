@@ -14,9 +14,6 @@ int validarHorario(int hora, int minuto);
 
 int idValido(char *caminho, int id);
 
-void printId(char *caminho);
-
 int inscricaoValida(int id_aluno, int id_aula);
 
 #endif
-

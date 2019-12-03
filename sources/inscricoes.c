@@ -1,21 +1,34 @@
 #include "../lib/inscricoes.h"  // structs e prototipos
 
 void inscreverAluno() {
-    int id, id_aluno, id_aula;
-    int alunoValido = 0, aulaValida = 0;
+    int id_aluno, id_aula;
+    int alunoValido = 1, aulaValida = 1;
 
-    printf("digite o Id do aluno: ");
-    scanf("%d", &id_aluno);
+    do {
+        system(clear);
+        if (alunoValido != 1 || aulaValida != 1) {
+            corTexto("Erro no id do aluno ou da aula.\n", 'r');
+        }
+        printf("Lista de Ids dos alunos: \n");
+        printId("aluno.csv");
 
-    printf("digite o Id da aula: ");
-    scanf("%d", &id_aula);
+        printf("\n digite o Id do aluno: ");
+        scanf("%d", &id_aluno);
 
-    alunoValido = idValido("aluno.csv", id_aluno);
-    aulaValida = idValido("aulas.csv", id_aula);
+        system(clear);
 
-    if (alunoValido == 1 && aulaValida == 1) {
-        salvarInscricao(id_aluno, id_aula);
-    }
+        printf("Lista de Ids das aulas: \n");
+        printIdAula();
+
+        printf("\n digite o Id da aula: ");
+        scanf("%d", &id_aula);
+
+        alunoValido = idValido("aluno.csv", id_aluno);
+        aulaValida = idValido("aulas.csv", id_aula);
+
+    } while (alunoValido != 1 || aulaValida != 1);
+
+    salvarInscricao(id_aluno, id_aula);
 }
 
 int salvarInscricao(int id_aluno, int id_aula) {

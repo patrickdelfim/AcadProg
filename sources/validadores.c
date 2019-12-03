@@ -111,12 +111,12 @@ int validarEMAIL(char *email) {
 }
 
 int validarHorario(int hora, int minuto) {
-	if (hora < 0 || hora > 24)
-		return 0;
-	if (minuto < 0 || minuto > 60)
-		return 0;
+    if (hora < 0 || hora > 24)
+        return 0;
+    if (minuto < 0 || minuto > 60)
+        return 0;
 
-	return 1;
+    return 1;
 }
 
 int idValido(char *caminho, int id) {
@@ -144,57 +144,21 @@ int idValido(char *caminho, int id) {
     return valido;
 }
 
-/* COLOCAR ESSA FUNCAO EM UTILITARIO \/\/\/ */
-
-void printId(char *caminho) {
-    FILE *arq = fopen(concat("data/", caminho), "r");
-
-    if (arq == NULL) {
-        exit(1);
-    }
-    // deveria fazer isso com memoria normal ou dinamica?
-    char nome[20];
-    char teste[10];
-    int id_loop, flip = 0;
-
-    while (!feof(arq)) {
-        fscanf(arq, "%d,%*[^,],%[^,],%*[^\n]\n", &id_loop, nome); // fscanf(arq, "%d,%*s,%s,%*s\n", &id_loop, nome);
-
-        /*===========================================
-            -=-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=--=-
-            NOME DO PROFESSOR NAO ESTA IMPRIMINDO (problema na leitura. por algum motivo nao esta 
-            lendo apenas os valores que preciso e sim o arquivo todo.)
-            -=-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=--=-
-        ===============================================*/
-
-        printf("id: %d ->  ", id_loop);
-        printf("%s ", nome);
-        if (flip == 1) {
-            flip = 0;
-            printf("\n");
-        } else {
-            flip = 1;
-        }
-    }
-
-    fclose(arq);
-}
-
 int inscricaoValida(int id_aluno, int id_aula) {
-	int valido = 0, aluno, aula;
+    int valido = 0, aluno, aula;
 
-	FILE *arq = fopen("data/inscricoes.csv", "r");
+    FILE *arq = fopen("data/inscricoes.csv", "r");
 
-	do {
-		fscanf(arq, "%d,%d\n", &aluno, &aula);
-		
-		printf("%d %d\n", aluno, aula);
-		if (aluno == id_aluno && aula == id_aula) {
-			valido = 1;
-			break;
-		}
+    do {
+        fscanf(arq, "%d,%d\n", &aluno, &aula);
 
-	} while(!feof(arq));
+        printf("%d %d\n", aluno, aula);
+        if (aluno == id_aluno && aula == id_aula) {
+            valido = 1;
+            break;
+        }
 
-	return valido;
+    } while (!feof(arq));
+
+    return valido;
 }

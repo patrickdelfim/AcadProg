@@ -190,3 +190,52 @@ int contarLinha(char *arquivo) {
 
     return --count;
 }
+
+void printId(char *caminho) {
+    FILE *arq = fopen(concat("data/", caminho), "r");
+
+    if (arq == NULL) {
+        exit(1);
+    }
+    // deveria fazer isso com memoria normal ou dinamica?
+    char nome[20];
+    int id_loop, flip = 0;
+
+    while (!feof(arq)) {
+        fscanf(arq, "%d,%*[^,],%[^,],%*[^\n]\n", &id_loop, nome);  // fscanf(arq, "%d,%*s,%s,%*s\n", &id_loop, nome);
+
+        printf("id: %d ->  ", id_loop);
+        printf("%s ", nome);
+        if (flip == 1) {
+            flip = 0;
+            printf("\n");
+        } else {
+            flip = 1;
+        }
+    }
+
+    fclose(arq);
+}
+
+void printIdAula() {
+    FILE *arq = fopen("data/aulas.csv", "r");
+
+    if (arq == NULL) {
+        exit(1);
+    }
+    int id_loop, dia, hora, minuto;
+    char tipo;
+
+        while (!feof(arq)) {
+        fscanf(arq, "%d,%*d,%*d,%*d,%d,%d:%d,%c,%*[^\n]\n",  // Formatacao do arquivo
+
+               &id_loop,  // Campos organizados
+               &dia,
+               &hora,
+               &minuto,
+               &tipo);
+
+        printf("Aula id: %d Dia:%d horario:%d:%d Tipo: %s", id_loop, dia, hora, minuto, charTipoAula(tipo));
+        printf("\n");
+    }
+}
