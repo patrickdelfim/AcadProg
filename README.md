@@ -22,6 +22,6 @@ Desenvolver um sistema em <b>C</b> para uma academia com as seguintes opções:
 https://www.notion.so/PROG-2-Trabalho-pr-tico-52daa8c5443f41f2a91a7918a779492d
 
 
-membros do grupo: /patrickdelfim
-                  /joaobartolot
-                  /pedraraujo
+membros do grupo: @patrickdelfim
+                  @joaobartolot
+                  @pedraraujo
