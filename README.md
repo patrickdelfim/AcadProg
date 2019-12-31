@@ -17,7 +17,7 @@ Desenvolver um sistema em <b>C</b> para uma academia com as seguintes opções:
 
 
 
-<h6>Especificacoes para o programa: </h6>
+<h6>Especificacoes mais detalhadas do projeto: </h6>
 
 https://www.notion.so/PROG-2-Trabalho-pr-tico-52daa8c5443f41f2a91a7918a779492d
 
